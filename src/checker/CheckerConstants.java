@@ -2,7 +2,7 @@ package checker;
 
 /**
  * The class contains the minimum of constants needed.
- *
+ * <p>
  * You can define your own constants here or create separate files.
  */
 public final class CheckerConstants {
