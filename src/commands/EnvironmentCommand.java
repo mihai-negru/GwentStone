@@ -1,4 +1,8 @@
 package commands;
 
-public class EnvironmentCommand implements Command {
+public final class EnvironmentCommand {
+
+    private EnvironmentCommand() { }
+    public void solveCommand() {
+    }
 }

@@ -1,4 +1,8 @@
 package commands;
 
-public class AttackCommand implements Command {
+public final class AttackCommand {
+    private AttackCommand() { }
+    public void solveCommand() {
+
+    }
 }
