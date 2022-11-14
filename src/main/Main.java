@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
 import fileio.Input;
+import game.GwentStone;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,13 +21,13 @@ import java.util.Objects;
  */
 public final class Main {
     /**
-     * for coding style
+     * for coding style.
      */
     private Main() {
     }
 
     /**
-     * DO NOT MODIFY MAIN METHOD
+     * DO NOT MODIFY MAIN METHOD.
      * Call the checker
      * @param args from command line
      * @throws IOException in case of exceptions to reading / writing
@@ -69,7 +70,7 @@ public final class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
 
-        //TODO add here the entry point to your implementation
+        GwentStone.getGame().start(inputData, output);
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);
