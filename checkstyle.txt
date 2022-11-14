@@ -1,2 +1,10 @@
 Starting audit...
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\AttackCommand.java:5:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:12:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:25:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\EnvironmentCommand.java:6:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\StatisticsCommand.java:10:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\StatisticsCommand.java:18:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\StatisticsCommand.java:27:5: Missing a Javadoc comment. [MissingJavadocMethod]
 Audit done.
+Checkstyle ends with 7 errors.
