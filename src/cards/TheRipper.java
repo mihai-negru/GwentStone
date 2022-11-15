@@ -1,4 +1,10 @@
 package cards;
 
-public class TheRipper extends Minion implements SpecialCard {
+import java.util.List;
+
+public final class TheRipper extends Minion implements SpecialCard {
+    public TheRipper(final int initMana, final int initHealth, final int initAttackDamage,
+                     final String initDescription, final List<String> initColors) {
+        super(initMana, initHealth, initAttackDamage, initDescription, "The Ripper", initColors);
+    }
 }

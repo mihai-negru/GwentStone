@@ -1,4 +1,10 @@
 package cards;
 
-public class GeneralKocioraw extends Hero {
+import java.util.List;
+
+public final class GeneralKocioraw extends Hero {
+    public GeneralKocioraw(final int initMana, final String initDescription,
+                          final List<String> initColors) {
+        super(initMana, initDescription, "General Kocioraw", initColors);
+    }
 }

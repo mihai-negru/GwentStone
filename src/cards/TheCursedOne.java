@@ -1,4 +1,11 @@
 package cards;
 
-public class TheCursedOne extends Minion implements SpecialCard {
+import java.util.List;
+
+public final class TheCursedOne extends Minion implements SpecialCard {
+    public TheCursedOne(final int initMana, final int initHealth, final int initAttackDamage,
+                        final String initDescription, final List<String> initColors) {
+        super(initMana, initHealth, initAttackDamage,
+                initDescription, "The Cursed One", initColors);
+    }
 }
