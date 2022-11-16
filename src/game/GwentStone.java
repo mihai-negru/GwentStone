@@ -1,9 +1,15 @@
 package game;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.Input;
+import players.PlayingPlayer;
+
+import java.util.ArrayList;
 
 public final class GwentStone {
+    private PlayingPlayer firstPlayer;
+    private PlayingPlayer secondPlayer;
 
     private GwentStone() {
     }
@@ -30,5 +36,15 @@ public final class GwentStone {
     }
 
     private void stop(final ArrayNode gameOutput) {
+    }
+
+    public PlayingPlayer getPlayer(final int playerIndex) {
+        if (playerIndex == 1) {
+            return firstPlayer;
+        } else if (playerIndex == 2) {
+            return secondPlayer;
+        }
+
+        return null;
     }
 }

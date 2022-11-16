@@ -1,10 +1,18 @@
 Starting audit...
 [ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\AttackCommand.java:5:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:12:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:25:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:5:8: Unused import - players.Player. [UnusedImports]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:15:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\DebugCommand.java:28:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\EnvironmentCommand.java:6:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\StatisticsCommand.java:10:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\StatisticsCommand.java:18:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\commands\StatisticsCommand.java:27:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\game\GwentStone.java:8:8: Unused import - java.util.ArrayList. [UnusedImports]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\game\GwentStone.java:44:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\main\Main.java:9:8: Unused import - com.fasterxml.jackson.databind.node.ObjectNode. [UnusedImports]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\main\Main.java:18:8: Unused import - java.util.ArrayList. [UnusedImports]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\players\Deck.java:32:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\players\Player.java:27:5: Class 'Player' looks like designed for extension (can be subclassed), but the method 'getPlayedGames' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Player' final or making the method 'getPlayedGames' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] M:\UPB_Files\An2_Sem1\Programarea_orientata_pe_obiecte\Teme\GwentStone\.\src\players\Player.java:31:5: Class 'Player' looks like designed for extension (can be subclassed), but the method 'getWinGames' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Player' final or making the method 'getWinGames' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 Audit done.
-Checkstyle ends with 7 errors.
+Checkstyle ends with 15 errors.

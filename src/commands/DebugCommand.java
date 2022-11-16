@@ -1,6 +1,9 @@
 package commands;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import game.GwentStone;
+import players.Player;
+import players.PlayingPlayer;
 
 public final class DebugCommand {
     private static final String COMMAND_ONE = "getCardsInHand";
@@ -33,10 +36,11 @@ public final class DebugCommand {
     }
 
     private static void getCardsInHand(final ArrayNode debugOutput, final int playerIndex) {
-
+        PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
     }
 
     private static void getPlayerDeck(final ArrayNode debugOutput, final int playerIndex) {
+        PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
 
     }
 
