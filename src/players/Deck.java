@@ -21,8 +21,8 @@ import java.util.List;
 public final class Deck {
     private final List<Card> cards;
 
-    public Deck(final ArrayList<CardInput> playerCards, final int nrCardsInDeck) {
-        cards = new ArrayList<>(nrCardsInDeck);
+    public Deck(final List<CardInput> playerCards) {
+        cards = new ArrayList<>();
 
         for (var playerCard : playerCards) {
             cards.add(createCardFromInput(playerCard));
@@ -141,6 +141,6 @@ public final class Deck {
     }
 
     public List<Card> getCards() {
-        return Collections.unmodifiableList(cards);
+        return cards;
     }
 }

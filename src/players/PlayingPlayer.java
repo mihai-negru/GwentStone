@@ -11,14 +11,23 @@ public final class PlayingPlayer extends Player {
     private Deck playingHand;
     private boolean isActive;
 
-    public PlayingPlayer(final DecksInput playerInfo, final Hero initGameHero,
-                         final int initPlayingDeckIndex) {
+    public PlayingPlayer(final DecksInput playerInfo) {
         super(playerInfo);
+        isActive = false;
+    }
+
+    public void setPlayerHero(final Hero initGameHero) {
         gameHero = initGameHero;
+    }
+
+    public void setPlayerPlayingDeck(final int initPlayingDeckIndex) {
         playingDeckIndex = initPlayingDeckIndex;
         playingDeck = new Deck(getDecks().get(playingDeckIndex));
         playingHand = new Deck();
-        isActive = false;
+    }
+
+    public void setPlayerTurn() {
+        isActive = !isActive;
     }
 
     public Deck getPlayingDeck() {

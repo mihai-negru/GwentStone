@@ -9,6 +9,5 @@ public class LordRoyce extends Hero {
     }
 
     public LordRoyce(final LordRoyce anotherLord) {
-        super(anotherLord);
-    }
+        super(anotherLord);    }
 }

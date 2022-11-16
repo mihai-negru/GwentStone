@@ -1,8 +1,8 @@
 package commands;
 
+import cards.Card;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import game.GwentStone;
-import players.Player;
 import players.PlayingPlayer;
 
 public final class DebugCommand {
@@ -37,14 +37,27 @@ public final class DebugCommand {
 
     private static void getCardsInHand(final ArrayNode debugOutput, final int playerIndex) {
         PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
+
+        for (Card cards : player.getPlayingHand().getCards()) {
+
+        }
     }
 
     private static void getPlayerDeck(final ArrayNode debugOutput, final int playerIndex) {
         PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
 
+        for (Card cards : player.getPlayingDeck().getCards()) {
+
+        }
     }
 
     private static void getCardsOnTable(final ArrayNode debugOutput) {
+        var table = GwentStone.getGame().getPlayingTable().getCards();
 
+        for (var row : table) {
+            for (var card : row) {
+
+            }
+        }
     }
 }

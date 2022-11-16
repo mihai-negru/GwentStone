@@ -72,7 +72,7 @@ public final class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
 
-        GwentStone.getGame().start(inputData, output);
+        GwentStone.getGame().play(inputData, output);
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

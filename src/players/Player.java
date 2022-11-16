@@ -1,5 +1,6 @@
 package players;
 
+import fileio.CardInput;
 import fileio.DecksInput;
 
 import java.util.ArrayList;
@@ -11,17 +12,17 @@ public class Player {
     private int winGames;
     private int nrDecks;
     private int nrCardsInDeck;
-    private final List<Deck> decks;
+    private final List<List<CardInput>> decks;
 
     public Player(final DecksInput playerInfo) {
         playedGames = 0;
         winGames = 0;
         nrDecks = playerInfo.getNrDecks();
         nrCardsInDeck = playerInfo.getNrCardsInDeck();
-        decks = new ArrayList<>(nrDecks);
+        decks = new ArrayList<>();
 
-        for (var playerDeck : playerInfo.getDecks()) {
-            decks.add(new Deck(playerDeck, nrCardsInDeck));
+        for (var deck : playerInfo.getDecks()) {
+            decks.add(new ArrayList<>(deck));
         }
     }
 
@@ -33,7 +34,7 @@ public class Player {
         return winGames;
     }
 
-    public List<Deck> getDecks() {
-        return Collections.unmodifiableList(decks);
+    public List<List<CardInput>> getDecks() {
+        return decks;
     }
 }
