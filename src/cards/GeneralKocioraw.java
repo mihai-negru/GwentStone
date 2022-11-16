@@ -7,4 +7,8 @@ public final class GeneralKocioraw extends Hero {
                           final List<String> initColors) {
         super(initMana, initDescription, "General Kocioraw", initColors);
     }
+
+    public GeneralKocioraw(final GeneralKocioraw anotherGeneral) {
+        super(anotherGeneral);
+    }
 }

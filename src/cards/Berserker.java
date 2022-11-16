@@ -7,4 +7,8 @@ public final class Berserker extends Minion {
                      final String initDescription, final List<String> initColors) {
         super(initMana, initHealth, initAttackDamage, initDescription, "Berserker", initColors);
     }
+
+    public Berserker(final Berserker anotherBerserker) {
+        super(anotherBerserker);
+    }
 }

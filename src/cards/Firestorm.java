@@ -7,4 +7,8 @@ public final class Firestorm extends Environment {
                      final List<String> initColors) {
         super(iniMana, initDescription, "Firestorm", initColors);
     }
+
+    public Firestorm(final Firestorm anotherFirestorm) {
+        super(anotherFirestorm);
+    }
 }

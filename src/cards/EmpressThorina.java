@@ -7,4 +7,8 @@ public final class EmpressThorina extends Hero {
                           final List<String> initColors) {
         super(initMana, initDescription, "Empress Thorina", initColors);
     }
+
+    public EmpressThorina(final EmpressThorina anotherEmpress) {
+        super(anotherEmpress);
+    }
 }

@@ -22,4 +22,9 @@ public abstract class Minion implements Card {
         name = Objects.requireNonNullElse(initName, "No name");
         colors = new ArrayList<>(initColors);
     }
+
+    public Minion(final Minion anotherMinion) {
+        this(anotherMinion.mana, anotherMinion.health, anotherMinion.attackDamage,
+                anotherMinion.description, anotherMinion.name, anotherMinion.colors);
+    }
 }

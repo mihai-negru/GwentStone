@@ -7,4 +7,8 @@ public final class HeartHound extends Environment {
                       final List<String> initColors) {
         super(iniMana, initDescription, "Heart Hound", initColors);
     }
+
+    public HeartHound(final HeartHound anotherHound) {
+        super(anotherHound);
+    }
 }

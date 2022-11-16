@@ -7,4 +7,8 @@ public final class Winterfell extends Environment {
                       final List<String> initColors) {
         super(iniMana, initDescription, "Winterfell", initColors);
     }
+
+    public Winterfell(final Winterfell anotherWinterfell) {
+        super(anotherWinterfell);
+    }
 }

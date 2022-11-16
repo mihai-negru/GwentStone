@@ -7,4 +7,8 @@ public final class KingMudface extends Hero {
                           final List<String> initColors) {
         super(initMana, initDescription, "King Mudface", initColors);
     }
+
+    public KingMudface(final KingMudface anotherKing) {
+        super(anotherKing);
+    }
 }

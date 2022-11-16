@@ -7,4 +7,8 @@ public final class Warden extends Minion implements TankCard {
                   final String initDescription, final List<String> initColors) {
         super(initMana, initHealth, initAttackDamage, initDescription, "Warden", initColors);
     }
+
+    public Warden(final Warden anotherWarden) {
+        super(anotherWarden);
+    }
 }

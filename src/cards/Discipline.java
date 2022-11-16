@@ -7,4 +7,8 @@ public final class Discipline extends Minion implements SpecialCard {
                       final String initDescription, final List<String> initColors) {
         super(initMana, initHealth, initAttackDamage, initDescription, "Discipline", initColors);
     }
+
+    public Discipline(final Discipline anotherDiscipline) {
+        super(anotherDiscipline);
+    }
 }

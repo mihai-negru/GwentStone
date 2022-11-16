@@ -18,4 +18,9 @@ public abstract class Hero implements Card, SpecialCard {
         name = Objects.requireNonNullElse(initName, "No name");
         colors = new ArrayList<>(initColors);
     }
+
+    public Hero(final Hero anotherHero) {
+        this(anotherHero.mana, anotherHero.description,
+                anotherHero.description, anotherHero.colors);
+    }
 }

@@ -7,4 +7,8 @@ public final class Miraj extends Minion implements SpecialCard {
                  final String initDescription, final List<String> initColors) {
         super(initMana, initHealth, initAttackDamage, initDescription, "Miraj", initColors);
     }
+
+    public Miraj(final Miraj anotherMiraj) {
+        super(anotherMiraj);
+    }
 }

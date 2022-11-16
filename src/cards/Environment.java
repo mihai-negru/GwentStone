@@ -17,4 +17,9 @@ public abstract class Environment implements Card {
         name = Objects.requireNonNullElse(initName, "No name");
         colors = new ArrayList<>(initColors);
     }
+
+    public Environment(final Environment anotherEnvironment) {
+        this(anotherEnvironment.mana, anotherEnvironment.description, anotherEnvironment.name,
+                anotherEnvironment.colors);
+    }
 }

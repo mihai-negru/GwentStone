@@ -8,4 +8,8 @@ public final class TheCursedOne extends Minion implements SpecialCard {
         super(initMana, initHealth, initAttackDamage,
                 initDescription, "The Cursed One", initColors);
     }
+
+    public TheCursedOne(final TheCursedOne anotherCursedOne) {
+        super(anotherCursedOne);
+    }
 }

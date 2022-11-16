@@ -7,4 +7,8 @@ public final class Sentinel extends Minion {
                     final String initDescription, final List<String> initColors) {
         super(initMana, initHealth, initAttackDamage, initDescription, "Sentinel", initColors);
     }
+
+    public Sentinel(final Sentinel anotherSentinel) {
+        super(anotherSentinel);
+    }
 }

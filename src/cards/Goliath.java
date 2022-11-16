@@ -7,4 +7,8 @@ public final class Goliath extends Minion implements TankCard {
                    final String initDescription, final List<String> initColors) {
         super(initMana, initHealth, initAttackDamage, initDescription, "Goliath", initColors);
     }
+
+    public Goliath(final Goliath anotherGoliath) {
+        super(anotherGoliath);
+    }
 }
