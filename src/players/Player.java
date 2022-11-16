@@ -3,6 +3,7 @@ package players;
 import fileio.DecksInput;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Player {
@@ -30,5 +31,9 @@ public class Player {
 
     public int getWinGames() {
         return winGames;
+    }
+
+    public List<Deck> getDecks() {
+        return Collections.unmodifiableList(decks);
     }
 }

@@ -25,11 +25,23 @@ public final class Deck {
         cards = new ArrayList<>(nrCardsInDeck);
 
         for (var playerCard : playerCards) {
-            cards.add(createCard(playerCard));
+            cards.add(createCardFromInput(playerCard));
         }
     }
 
-    public Card createCard(final CardInput playerCard) {
+    public Deck(final Deck anotherDeck) {
+        cards = new ArrayList<>();
+
+        for (Card copyCard : anotherDeck.cards) {
+            cards.add(copyCardInfo(copyCard));
+        }
+    }
+
+    public Deck() {
+        cards = new ArrayList<>();
+    }
+
+    private Card createCardFromInput(final CardInput playerCard) {
         Card card = null;
 
         String cardName = playerCard.getName();
@@ -78,6 +90,54 @@ public final class Deck {
         }
 
         return card;
+    }
+
+    private Card copyCardInfo(final Card copyCard) {
+        Card card = null;
+
+        String cardName = copyCard.getCardName();
+
+        if (cardName.equals("Berserker")) {
+            card = new Berserker((Berserker) copyCard);
+        } else if (cardName.equals("Discipline")) {
+            card = new Discipline((Discipline) copyCard);
+        } else if (cardName.equals("Goliath")) {
+            card = new Goliath((Goliath) copyCard);
+        } else if (cardName.equals("Miraj")) {
+            card = new Miraj((Miraj) copyCard);
+        } else if (cardName.equals("Sentinel")) {
+            card = new Sentinel((Sentinel) copyCard);
+        } else if (cardName.equals("The Cursed One")) {
+            card = new TheCursedOne((TheCursedOne) copyCard);
+        } else if (cardName.equals("The Ripper")) {
+            card = new TheRipper((TheRipper) copyCard);
+        } else if (cardName.equals("Warden")) {
+            card = new Warden((Warden) copyCard);
+        } else if (cardName.equals("Firestorm")) {
+            card = new Firestorm((Firestorm) copyCard);
+        } else if (cardName.equals("Heart Hound")) {
+            card = new HeartHound((HeartHound) copyCard);
+        } else if (cardName.equals("Winterfell")) {
+            card = new Winterfell((Winterfell) copyCard);
+        }
+
+        return card;
+    }
+
+    public boolean addCard(final Card card) {
+        if (card != null) {
+            return cards.add(copyCardInfo(card));
+        }
+
+        return false;
+    }
+
+    public boolean removeCard(final int index) {
+        if (index >= 0) {
+            return (cards.remove(index) != null);
+        }
+
+        return false;
     }
 
     public List<Card> getCards() {
