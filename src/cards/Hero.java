@@ -23,4 +23,9 @@ public abstract class Hero implements Card, SpecialCard {
         this(anotherHero.mana, anotherHero.description,
                 anotherHero.description, anotherHero.colors);
     }
+
+    @Override
+    public String getCardName() {
+        return name;
+    }
 }

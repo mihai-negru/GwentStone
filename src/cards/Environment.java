@@ -22,4 +22,9 @@ public abstract class Environment implements Card {
         this(anotherEnvironment.mana, anotherEnvironment.description, anotherEnvironment.name,
                 anotherEnvironment.colors);
     }
+
+    @Override
+    public String getCardName() {
+        return name;
+    }
 }

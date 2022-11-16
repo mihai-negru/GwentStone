@@ -27,4 +27,9 @@ public abstract class Minion implements Card {
         this(anotherMinion.mana, anotherMinion.health, anotherMinion.attackDamage,
                 anotherMinion.description, anotherMinion.name, anotherMinion.colors);
     }
+
+    @Override
+    public String getCardName() {
+        return name;
+    }
 }
