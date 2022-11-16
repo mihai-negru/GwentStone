@@ -24,21 +24,24 @@ public final class BattleTableCommand {
         commandNode.put("command", "placeCard");
         commandNode.put("handIdx", action.getHandIdx());
 
-        Card cardToPlace = player.getPlayingHand().getCards().get(action.getHandIdx());
+        Card cardToPlace = player.getPlayingHand().getCard(action.getHandIdx());
+
+        if (cardToPlace == null) {
+            return;
+        }
 
         if (!cardToPlace.isNormal()) {
             commandNode.put("error", "Cannot place environment card on table.");
             debugOutput.add(commandNode);
         } else {
             Minion minionToPlace = (Minion) cardToPlace;
-
             if (minionToPlace.getMana() > player.getPlayerMana()) {
                 commandNode.put("error", "Not enough mana to place card on table.");
                 debugOutput.add(commandNode);
             } else {
                 boolean cardInFrontRow = minionToPlace.inFrontRow();
 
-                int calculateRowToPlaceCard = -1;
+                int calculateRowToPlaceCard;
                 if ((playerIndex == 1) && cardInFrontRow) {
                     calculateRowToPlaceCard = 2;
                 } else if (playerIndex == 1) {
@@ -49,14 +52,14 @@ public final class BattleTableCommand {
                     calculateRowToPlaceCard = 0;
                 }
 
-                if (calculateRowToPlaceCard > 0) {
-                    if (!GwentStone.getGame().getPlayingTable().addCardToTable(minionToPlace,
-                            calculateRowToPlaceCard)) {
-                        commandNode.put("error", "Cannot place card on table since row is full.");
-                        debugOutput.add(commandNode);
-                    } else {
-                        player.getPlayingHand().removeCard(action.getHandIdx());
-                    }
+
+                if (!GwentStone.getGame().getPlayingTable().addCardToTable(minionToPlace,
+                        calculateRowToPlaceCard)) {
+                    commandNode.put("error", "Cannot place card on table since row is full.");
+                    debugOutput.add(commandNode);
+                } else {
+                    player.getPlayingHand().removeCard(action.getHandIdx());
+                    player.subMana(minionToPlace.getMana());
                 }
             }
         }

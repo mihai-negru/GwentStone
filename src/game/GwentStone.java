@@ -4,14 +4,11 @@ import actions.Action;
 import battlefield.BattleTable;
 import cards.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.CardInput;
 import fileio.GameInput;
 import fileio.Input;
-import fileio.StartGameInput;
 import players.PlayingPlayer;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
@@ -23,11 +20,11 @@ public final class GwentStone {
     private int manaIncrementor;
     private int playingPlayerIdx;
 
+    private int gamesPlayed = 1;
+
     private GwentStone() {
         playingPlayers = new PlayingPlayer[2];
         playingTable = new BattleTable();
-        manaIncrementor = 1;
-        playingPlayerIdx = -1;
     }
 
     private static class GwentStoneHelper {
@@ -39,23 +36,35 @@ public final class GwentStone {
     }
 
     public void play(final Input gameInput, final ArrayNode gameOutput) {
-        playingPlayers[0] = new PlayingPlayer(gameInput.getPlayerOneDecks());
-        playingPlayers[1] = new PlayingPlayer(gameInput.getPlayerTwoDecks());
+        preprocess(gameInput);
 
         for (var game : gameInput.getGames()) {
+            if (gamesPlayed > 4) {
+                break;
+            }
             start(game);
 
             while (!playingActions.noMoreActions()) {
                 if (playingActions.isNextDebugCommand()) {
                     playingActions.solveNextDebugCommand(gameOutput);
                 } else {
-//                    playerTurn(gameOutput);
-//                    playerTurn(gameOutput);
-//                    update();
-                    break;
+                    playerTurn(gameOutput);
+                    playerTurn(gameOutput);
+                    update();
                 }
             }
+
+            gamesPlayed++;
+
+            exit();
         }
+    }
+
+    private void preprocess(final Input gameInput) {
+        manaIncrementor = 1;
+        playingPlayerIdx = -1;
+        playingPlayers[0] = new PlayingPlayer(gameInput.getPlayerOneDecks());
+        playingPlayers[1] = new PlayingPlayer(gameInput.getPlayerTwoDecks());
     }
 
     private void start(final GameInput startInput) {
@@ -82,15 +91,15 @@ public final class GwentStone {
     }
 
     private void playerTurn(final ArrayNode gameOutput) {
-        // The round starts
         String command = playingActions.solveNextAction(gameOutput);
-
-        if (command.equals("endPlayerTurn")) {
-            playingPlayers[playingPlayerIdx].setPlayerTurn();
-            playingPlayers[playingPlayerIdx].unfrozeAllCards();
-            playingPlayerIdx = (playingPlayerIdx + 1) % 2;
-            playingPlayers[playingPlayerIdx].setPlayerTurn();
+        while (!command.equals("endPlayerTurn")) {
+            command = playingActions.solveNextAction(gameOutput);
         }
+
+        playingPlayers[playingPlayerIdx].setPlayerTurn();
+        playingPlayers[playingPlayerIdx].unfrozeAllCards();
+        playingPlayerIdx = (playingPlayerIdx + 1) % 2;
+        playingPlayers[playingPlayerIdx].setPlayerTurn();
     }
 
     private void update() {
@@ -103,6 +112,10 @@ public final class GwentStone {
 
         playingPlayers[0].addMana(manaIncrementor);
         playingPlayers[1].addMana(manaIncrementor);
+    }
+
+    private void exit() {
+        playingTable.clearTable();
     }
 
     private Hero aNewHeroIsBorn(final CardInput heroCard) {

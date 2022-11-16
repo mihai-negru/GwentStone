@@ -42,4 +42,8 @@ public class Action {
 
         return false;
     }
+
+    public List<ActionsInput> ads() {
+        return actions;
+    }
 }

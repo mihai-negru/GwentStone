@@ -11,4 +11,9 @@ public final class Warden extends Minion implements TankCard {
     public Warden(final Warden anotherWarden) {
         super(anotherWarden);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return true;
+    }
 }

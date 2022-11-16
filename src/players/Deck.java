@@ -99,7 +99,7 @@ public final class Deck {
 
         if (cardName.equals("Berserker")) {
             card = new Berserker((Berserker) copyCard);
-        } else if (cardName.equals("Discipline")) {
+        } else if (cardName.equals("Disciple")) {
             card = new Disciple((Disciple) copyCard);
         } else if (cardName.equals("Goliath")) {
             card = new Goliath((Goliath) copyCard);
@@ -126,18 +126,28 @@ public final class Deck {
 
     public boolean addCard(final Card card) {
         if (card != null) {
-            return cards.add(copyCardInfo(card));
+            return cards.add(card);
         }
 
         return false;
     }
 
     public boolean removeCard(final int index) {
-        if ((index >= 0) && (cards.size() > index)) {
-            return (cards.remove(index) != null);
+        if ((index >= 0) && (index < cards.size())) {
+            cards.remove(index);
+
+            return true;
         }
 
         return false;
+    }
+
+    public Card getCard(final int index) {
+        if ((index >= 0) && (index < cards.size())) {
+            return cards.get(index);
+        }
+
+        return null;
     }
 
     public Card removeFirstCard() {

@@ -86,9 +86,11 @@ public final class DebugCommand {
 
         ArrayNode cardsOutput = commandNode.putArray("output");
         for (var row : table) {
+            ArrayNode rowCards = cardsOutput.arrayNode();
             for (var card : row) {
-                card.printJson(cardsOutput.addObject());
+                card.printJson(rowCards.addObject());
             }
+            cardsOutput.add(rowCards);
         }
 
         debugOutput.add(commandNode);

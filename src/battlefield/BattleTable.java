@@ -23,10 +23,16 @@ public final class BattleTable {
     public boolean addCardToTable(final Minion cardToPlace, final int rowIndex) {
         var rowList = table.get(rowIndex);
 
-        if (rowList.size() > 5) {
+        if (rowList.size() >= 5) {
             return false;
         }
 
         return rowList.add(cardToPlace);
+    }
+
+    public void clearTable() {
+        for (var row : table) {
+            row.clear();
+        }
     }
 }
