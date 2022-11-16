@@ -11,4 +11,9 @@ public final class Sentinel extends Minion {
     public Sentinel(final Sentinel anotherSentinel) {
         super(anotherSentinel);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return false;
+    }
 }

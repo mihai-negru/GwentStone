@@ -11,4 +11,9 @@ public final class Goliath extends Minion implements TankCard {
     public Goliath(final Goliath anotherGoliath) {
         super(anotherGoliath);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return true;
+    }
 }

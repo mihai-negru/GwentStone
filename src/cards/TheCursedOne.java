@@ -12,4 +12,9 @@ public final class TheCursedOne extends Minion implements SpecialCard {
     public TheCursedOne(final TheCursedOne anotherCursedOne) {
         super(anotherCursedOne);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return false;
+    }
 }

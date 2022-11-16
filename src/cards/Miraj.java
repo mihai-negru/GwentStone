@@ -11,4 +11,9 @@ public final class Miraj extends Minion implements SpecialCard {
     public Miraj(final Miraj anotherMiraj) {
         super(anotherMiraj);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return true;
+    }
 }

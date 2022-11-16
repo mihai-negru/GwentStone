@@ -11,4 +11,9 @@ public final class Berserker extends Minion {
     public Berserker(final Berserker anotherBerserker) {
         super(anotherBerserker);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return false;
+    }
 }

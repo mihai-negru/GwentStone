@@ -23,6 +23,7 @@ public class Player {
 
         for (var deck : playerInfo.getDecks()) {
             decks.add(new ArrayList<>(deck));
+
         }
     }
 

@@ -11,9 +11,12 @@ public final class PlayingPlayer extends Player {
     private Deck playingHand;
     private boolean isActive;
 
+    private int playerMana;
+
     public PlayingPlayer(final DecksInput playerInfo) {
         super(playerInfo);
         isActive = false;
+        playerMana = 0;
     }
 
     public void setPlayerHero(final Hero initGameHero) {
@@ -22,7 +25,8 @@ public final class PlayingPlayer extends Player {
 
     public void setPlayerPlayingDeck(final int initPlayingDeckIndex) {
         playingDeckIndex = initPlayingDeckIndex;
-        playingDeck = new Deck(getDecks().get(playingDeckIndex));
+        playingDeck = new Deck(super.getDecks().get(playingDeckIndex));
+
         playingHand = new Deck();
     }
 
@@ -36,5 +40,33 @@ public final class PlayingPlayer extends Player {
 
     public Deck getPlayingHand() {
         return playingHand;
+    }
+
+    public boolean getTurn() {
+        return isActive;
+    }
+
+    public Hero getGameHero() {
+        return gameHero;
+    }
+
+    public int getPlayerMana() {
+        return playerMana;
+    }
+
+    public boolean addCardToPlayerHand() {
+        if (playingDeck.isEmpty()) {
+            return false;
+        }
+
+        return playingHand.addCard(playingDeck.removeFirstCard());
+    }
+
+    public void addMana(final int mana) {
+        playerMana += mana;
+    }
+
+    public void unfrozeAllCards() {
+
     }
 }

@@ -2,9 +2,7 @@ package battlefield;
 
 import cards.Minion;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public final class BattleTable {
@@ -20,5 +18,15 @@ public final class BattleTable {
 
     public List<List<Minion>> getCards() {
         return table;
+    }
+
+    public boolean addCardToTable(final Minion cardToPlace, final int rowIndex) {
+        var rowList = table.get(rowIndex);
+
+        if (rowList.size() > 5) {
+            return false;
+        }
+
+        return rowList.add(cardToPlace);
     }
 }

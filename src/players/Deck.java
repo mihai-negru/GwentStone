@@ -2,7 +2,7 @@ package players;
 
 import cards.Berserker;
 import cards.Card;
-import cards.Discipline;
+import cards.Disciple;
 import cards.Firestorm;
 import cards.Goliath;
 import cards.HeartHound;
@@ -50,8 +50,8 @@ public final class Deck {
             card = new Berserker(playerCard.getMana(), playerCard.getHealth(),
                     playerCard.getAttackDamage(), playerCard.getDescription(),
                     playerCard.getColors());
-        } else if (cardName.equals("Discipline")) {
-            card = new Discipline(playerCard.getMana(), playerCard.getHealth(),
+        } else if (cardName.equals("Disciple")) {
+            card = new Disciple(playerCard.getMana(), playerCard.getHealth(),
                     playerCard.getAttackDamage(), playerCard.getDescription(),
                     playerCard.getColors());
         } else if (cardName.equals("Goliath")) {
@@ -100,7 +100,7 @@ public final class Deck {
         if (cardName.equals("Berserker")) {
             card = new Berserker((Berserker) copyCard);
         } else if (cardName.equals("Discipline")) {
-            card = new Discipline((Discipline) copyCard);
+            card = new Disciple((Disciple) copyCard);
         } else if (cardName.equals("Goliath")) {
             card = new Goliath((Goliath) copyCard);
         } else if (cardName.equals("Miraj")) {
@@ -133,14 +133,26 @@ public final class Deck {
     }
 
     public boolean removeCard(final int index) {
-        if (index >= 0) {
+        if ((index >= 0) && (cards.size() > index)) {
             return (cards.remove(index) != null);
         }
 
         return false;
     }
 
+    public Card removeFirstCard() {
+        if (cards.size() > 0) {
+            return cards.remove(0);
+        }
+
+        return null;
+    }
+
     public List<Card> getCards() {
         return cards;
+    }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
     }
 }

@@ -1,5 +1,7 @@
 package cards;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.CardInput;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public abstract class Hero implements Card, SpecialCard {
         mana = initMana;
         description = Objects.requireNonNullElse(initDescription, "No description");
         name = Objects.requireNonNullElse(initName, "No name");
+        health = 30;
         colors = new ArrayList<>(initColors);
     }
 
@@ -29,5 +32,29 @@ public abstract class Hero implements Card, SpecialCard {
     @Override
     public String getCardName() {
         return name;
+    }
+
+    @Override
+    public void printJson(final ObjectNode node) {
+        node.put("mana", mana);
+        node.put("description", description);
+
+        ArrayNode colorsNode = node.putArray("colors");
+        for (var color : colors) {
+            colorsNode.add(color);
+        }
+
+        node.put("name", name);
+        node.put("health", health);
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return false;
+    }
+
+    @Override
+    public boolean isNormal() {
+        return false;
     }
 }

@@ -11,4 +11,9 @@ public final class TheRipper extends Minion implements SpecialCard {
     public TheRipper(final TheRipper anotherRipper) {
         super(anotherRipper);
     }
+
+    @Override
+    public boolean inFrontRow() {
+        return true;
+    }
 }

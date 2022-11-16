@@ -1,5 +1,8 @@
 package cards;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,5 +29,28 @@ public abstract class Environment implements Card {
     @Override
     public String getCardName() {
         return name;
+    }
+
+    @Override
+    public void printJson(final ObjectNode node) {
+        node.put("mana", mana);
+        node.put("description", description);
+
+        ArrayNode colorsNode = node.putArray("colors");
+        for (var color : colors) {
+            colorsNode.add(color);
+        }
+
+        node.put("name", name);
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return false;
+    }
+
+    @Override
+    public boolean isNormal() {
+        return false;
     }
 }

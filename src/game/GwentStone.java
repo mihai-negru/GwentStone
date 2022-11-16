@@ -20,9 +20,14 @@ public final class GwentStone {
     private final BattleTable playingTable;
     private Action playingActions;
 
+    private int manaIncrementor;
+    private int playingPlayerIdx;
+
     private GwentStone() {
         playingPlayers = new PlayingPlayer[2];
         playingTable = new BattleTable();
+        manaIncrementor = 1;
+        playingPlayerIdx = -1;
     }
 
     private static class GwentStoneHelper {
@@ -41,7 +46,14 @@ public final class GwentStone {
             start(game);
 
             while (!playingActions.noMoreActions()) {
-                update(gameOutput);
+                if (playingActions.isNextDebugCommand()) {
+                    playingActions.solveNextDebugCommand(gameOutput);
+                } else {
+//                    playerTurn(gameOutput);
+//                    playerTurn(gameOutput);
+//                    update();
+                    break;
+                }
             }
         }
     }
@@ -53,20 +65,44 @@ public final class GwentStone {
         playingPlayers[0].setPlayerHero(aNewHeroIsBorn(startInput.getStartGame().getPlayerOneHero()));
         playingPlayers[1].setPlayerHero(aNewHeroIsBorn(startInput.getStartGame().getPlayerTwoHero()));
 
-        final Random rand = new Random(startInput.getStartGame().getShuffleSeed());
+        Collections.shuffle(playingPlayers[0].getPlayingDeck().getCards(), new Random(startInput.getStartGame().getShuffleSeed()));
+        Collections.shuffle(playingPlayers[1].getPlayingDeck().getCards(), new Random(startInput.getStartGame().getShuffleSeed()));
 
-        Collections.shuffle(playingPlayers[0].getPlayingDeck().getCards(), rand);
-        Collections.shuffle(playingPlayers[1].getPlayingDeck().getCards(), rand);
-
-        playingPlayers[startInput.getStartGame().getStartingPlayer() - 1].setPlayerTurn();
+        playingPlayerIdx = startInput.getStartGame().getStartingPlayer() - 1;
 
         playingActions = new Action(startInput.getActions());
+
+        playingPlayers[0].addCardToPlayerHand();
+        playingPlayers[1].addCardToPlayerHand();
+
+        playingPlayers[0].addMana(manaIncrementor);
+        playingPlayers[1].addMana(manaIncrementor);
+
+        playingPlayers[playingPlayerIdx].setPlayerTurn();
     }
 
-    private void update(final ArrayNode gameOutput) {
-        var processAction = playingActions.getNextAction();
+    private void playerTurn(final ArrayNode gameOutput) {
+        // The round starts
+        String command = playingActions.solveNextAction(gameOutput);
 
+        if (command.equals("endPlayerTurn")) {
+            playingPlayers[playingPlayerIdx].setPlayerTurn();
+            playingPlayers[playingPlayerIdx].unfrozeAllCards();
+            playingPlayerIdx = (playingPlayerIdx + 1) % 2;
+            playingPlayers[playingPlayerIdx].setPlayerTurn();
+        }
+    }
 
+    private void update() {
+        if (manaIncrementor < 10) {
+            ++manaIncrementor;
+        }
+
+        playingPlayers[0].addCardToPlayerHand();
+        playingPlayers[1].addCardToPlayerHand();
+
+        playingPlayers[0].addMana(manaIncrementor);
+        playingPlayers[1].addMana(manaIncrementor);
     }
 
     private Hero aNewHeroIsBorn(final CardInput heroCard) {
@@ -93,5 +129,9 @@ public final class GwentStone {
 
     public BattleTable getPlayingTable() {
         return playingTable;
+    }
+
+    public int getPlayingPlayerIdx() {
+        return playingPlayerIdx + 1;
     }
 }
