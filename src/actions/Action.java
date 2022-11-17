@@ -3,6 +3,7 @@ package actions;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.BattleTableCommand;
 import commands.DebugCommand;
+import commands.EnvironmentCommand;
 import fileio.ActionsInput;
 
 import java.util.ArrayList;
@@ -19,29 +20,29 @@ public class Action {
         return actions.isEmpty();
     }
 
-    public String solveNextAction(final ArrayNode gameOutput) {
-        ActionsInput action = actions.remove(0);
+    public String solve(final ArrayNode gameOutput) {
+        var action = actions.remove(0);
 
-        switch (action.getCommand()) {
-            case "placeCard" -> BattleTableCommand.solveCommand(gameOutput, action);
+        if (action.getCommand().startsWith("get")) {
+            solveNextDebugCommand(gameOutput, action);
+        } else {
+            solveNextAction(gameOutput, action);
         }
 
         return action.getCommand();
     }
 
-    public void solveNextDebugCommand(final ArrayNode gameOutput) {
-        DebugCommand.solveCommand(gameOutput, actions.remove(0));
-    }
-
-    public boolean isNextDebugCommand() {
-        if (actions.size() > 0) {
-            ActionsInput action = actions.get(0);
-
-            return action.getCommand().startsWith("get");
+    private void solveNextAction(final ArrayNode gameOutput, final ActionsInput action) {
+        switch (action.getCommand()) {
+            case "placeCard" -> BattleTableCommand.solveCommand(gameOutput, action);
+            case "useEnvironmentCard" -> EnvironmentCommand.solveCommand(gameOutput, action);
         }
-
-        return false;
     }
+
+    private void solveNextDebugCommand(final ArrayNode gameOutput, final ActionsInput action) {
+        DebugCommand.solveCommand(gameOutput, action);
+    }
+
 
     public List<ActionsInput> ads() {
         return actions;
