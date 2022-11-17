@@ -20,6 +20,10 @@ public final class BattleTable {
         return table;
     }
 
+    public List<Minion> getCardsRow(final int rowIndex) {
+        return table.get(rowIndex);
+    }
+
     public boolean addCardToTable(final Minion cardToPlace, final int rowIndex) {
         var rowList = table.get(rowIndex);
 
@@ -28,6 +32,12 @@ public final class BattleTable {
         }
 
         return rowList.add(cardToPlace);
+    }
+
+    public void checkTable() {
+        for (var row : table) {
+            row.removeIf(card -> card.getHealth() <= 0);
+        }
     }
 
     public void clearTable() {
