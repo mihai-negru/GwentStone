@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class Hero implements Card, SpecialCard {
-    protected int mana;
-    protected int health;
-    protected final String description;
-    protected final String name;
-    protected final List<String> colors;
+    private final int mana;
+    private int health;
+    private final String description;
+    private final String name;
+    private final List<String> colors;
 
     public Hero(final int initMana, final String initDescription, final String initName,
                 final List<String> initColors) {
@@ -59,11 +59,16 @@ public abstract class Hero implements Card, SpecialCard {
 
     @Override
     public String attack(int posX, int posY) {
-        return "Ok";
+        return useAbility(posX, posY);
     }
 
-    @Override
-    public String useAbility(int posX, int posY) {
-        return "null";
+    public void gotAttacked(final int points) {
+        if (points > 0) {
+            health -= points;
+        }
+    }
+
+    public int getHealth() {
+        return health;
     }
 }

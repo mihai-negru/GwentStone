@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class Minion implements Card {
-    protected final int mana;
-    protected int health;
-    protected int attackDamage;
-    protected boolean isFrozen;
-    protected boolean hasAttacked;
-    protected final String description;
-    protected final String name;
-    protected final List<String> colors;
+    private final int mana;
+    private int health;
+    private int attackDamage;
+    private boolean isFrozen;
+    private boolean hasAttacked;
+    private final String description;
+    private final String name;
+    private final List<String> colors;
 
     public Minion(final int initMana, final int initHealth, final int initAttackDamage,
                   final String initDescription, final String initName,
@@ -123,6 +123,10 @@ public abstract class Minion implements Card {
         return attackDamage;
     }
 
+    public void performedAnAction() {
+        hasAttacked = true;
+    }
+
     @Override
     public String attack(int posX, int posY) {
         Minion attackedCard = GwentStone.getGame().getPlayingTable().getCard(posX, posY);
@@ -148,32 +152,4 @@ public abstract class Minion implements Card {
 
         return "Ok";
     }
-
-    //    @Override
-//    public boolean equals(Object obj) {
-//        if (obj == null) {
-//            return false;
-//        }
-//
-//        if (obj instanceof Minion aMinion) {
-//            boolean firstCheck =  (mana == aMinion.mana) &&
-//                    (health == aMinion.health) &&
-//                    (attackDamage == aMinion.attackDamage) &&
-//                    (isFrozen == aMinion.isFrozen) &&
-//                    (description.equals(aMinion.description)) &&
-//                    (name.equals(aMinion.name));
-//
-//            if (firstCheck) {
-//                if (colors.size() != aMinion.colors.size()) {
-//                    return false;
-//                }
-//
-//
-//            }
-//
-//            return firstCheck;
-//        }
-//
-//        return false;
-//    }
 }

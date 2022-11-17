@@ -36,6 +36,7 @@ public class Action {
             case "useEnvironmentCard" -> EnvironmentCommand.solveCommand(gameOutput, action);
             case "cardUsesAttack" -> AttackCommand.solveCommand(gameOutput, action);
             case "cardUsesAbility" -> AbilityCommand.solveCommand(gameOutput, action);
+            case "useAttackHero" -> AttackHeroCommand.solveCommand(gameOutput, action);
         }
     }
 

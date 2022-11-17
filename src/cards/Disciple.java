@@ -43,7 +43,7 @@ public final class Disciple extends Minion implements SpecialCard {
         }
 
         affectedCard.addHealth(2);
-        hasAttacked = true;
+        performedAnAction();
 
         return "Ok";
     }

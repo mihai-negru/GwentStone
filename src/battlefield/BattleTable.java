@@ -99,7 +99,7 @@ public final class BattleTable {
         }
 
         return !minion.isTank()
-                && ((((posX == 0) || (posX == 1)) && GwentStone.getGame().getPlayingTable().rowHasTanks(1))
-                || (((posX == 2) || (posX == 3)) && GwentStone.getGame().getPlayingTable().rowHasTanks(2)));
+                && ((((posX == 0) || (posX == 1)) && rowHasTanks(1))
+                || (((posX == 2) || (posX == 3)) && rowHasTanks(2)));
     }
 }

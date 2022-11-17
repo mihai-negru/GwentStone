@@ -49,7 +49,7 @@ public final class Miraj extends Minion implements SpecialCard {
         final int affectedCardHealth = affectedCard.getHealth();
         affectedCard.setHealth(getHealth());
         setHealth(affectedCardHealth);
-        hasAttacked = true;
+        performedAnAction();
 
         return "Ok";
     }

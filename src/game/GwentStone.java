@@ -20,6 +20,8 @@ public final class GwentStone {
     private int manaIncrementor;
     private int playingPlayerIdx;
 
+    private boolean gameIsAlive;
+
     private int gamesPlayed = 1;
 
     private GwentStone() {
@@ -39,7 +41,7 @@ public final class GwentStone {
         preprocess(gameInput);
 
         for (var game : gameInput.getGames()) {
-            if (gamesPlayed > 9) {
+            if (gamesPlayed > 11) {
                 break;
             }
             start(game);
@@ -84,10 +86,13 @@ public final class GwentStone {
         playingPlayers[1].addMana(manaIncrementor);
 
         playingPlayers[playingPlayerIdx].setPlayerTurn();
+
+        gameIsAlive = true;
     }
 
     private void playerTurn(final ArrayNode gameOutput) {
-        while (!playingActions.noMoreActions() && !playingActions.solve(gameOutput).equals("endPlayerTurn")) {}
+        while (!playingActions.noMoreActions() && !playingActions.solve(gameOutput).equals(
+                "endPlayerTurn")) {}
 
         playingPlayers[playingPlayerIdx].setPlayerTurn();
         playingTable.resetPlayerCards(playingPlayerIdx);
@@ -140,5 +145,9 @@ public final class GwentStone {
 
     public int getPlayingPlayerIdx() {
         return playingPlayerIdx + 1;
+    }
+
+    public void stopGame() {
+        gameIsAlive = false;
     }
 }

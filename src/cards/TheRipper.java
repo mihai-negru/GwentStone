@@ -48,7 +48,7 @@ public final class TheRipper extends Minion implements SpecialCard {
 
         affectedCard.subAttack(2);
 
-        hasAttacked = true;
+        performedAnAction();
 
         return "Ok";
     }
