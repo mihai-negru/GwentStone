@@ -116,8 +116,6 @@ public final class DebugCommand {
         commandNode.put("command", COMMAND_FIVE);
         commandNode.put("playerIdx", playerIndex);
 
-        ObjectNode cardsOutput = commandNode.objectNode();
-
         GwentStone.getGame().getPlayer(playerIndex).getGameHero().printJson(commandNode.putObject("output"));
 
         debugOutput.add(commandNode);
@@ -132,9 +130,8 @@ public final class DebugCommand {
 
         var tableRow = GwentStone.getGame().getPlayingTable().getCards().get(posX);
 
-        if (tableRow.size() > posY) {
-            ArrayNode cardsOutput = commandNode.putArray("output");
-            tableRow.get(posY).printJson(cardsOutput.addObject());
+        if (tableRow.size() > posY) {;
+            tableRow.get(posY).printJson(commandNode.putObject("output"));
         } else {
             commandNode.put("output", "No card at that position.");
         }
@@ -161,7 +158,7 @@ public final class DebugCommand {
         var handCards = GwentStone.getGame().getPlayer(playerIndex).getPlayingHand().getCards();
 
         for (var card : handCards) {
-            if (card instanceof Environment) {
+            if (!card.isNormal()) {
                 card.printJson(cardsOutput.addObject());
             }
         }
