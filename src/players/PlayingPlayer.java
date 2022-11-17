@@ -9,6 +9,9 @@ import lombok.Setter;
 /**
  * <p>Class to store the information of a player
  * playing a game or a session of games.</p>
+ *
+ * @author Mihai Negru
+ * @since 1.0.0
  */
 public final class PlayingPlayer extends Player {
     /**

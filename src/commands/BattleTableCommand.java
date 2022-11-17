@@ -24,18 +24,18 @@ public final class BattleTableCommand {
         commandNode.put("command", "placeCard");
         commandNode.put("handIdx", action.getHandIdx());
 
-        Card cardToPlace = player.getPlayingHand().getCard(action.getHandIdx());
+        Card cardToPlace = player.getHand().getCard(action.getHandIdx());
 
         if (cardToPlace == null) {
             return;
         }
 
-        if (!cardToPlace.isNormal()) {
+        if (!cardToPlace.isMinion()) {
             commandNode.put("error", "Cannot place environment card on table.");
             debugOutput.add(commandNode);
         } else {
             Minion minionToPlace = (Minion) cardToPlace;
-            if (minionToPlace.getMana() > player.getPlayerMana()) {
+            if (minionToPlace.getMana() > player.getMana()) {
                 commandNode.put("error", "Not enough mana to place card on table.");
                 debugOutput.add(commandNode);
             } else {
@@ -58,8 +58,8 @@ public final class BattleTableCommand {
                     commandNode.put("error", "Cannot place card on table since row is full.");
                     debugOutput.add(commandNode);
                 } else {
-                    player.getPlayingHand().removeCard(action.getHandIdx());
-                    player.subMana(minionToPlace.getMana());
+                    player.getHand().removeCard(action.getHandIdx());
+                    player.loseMana(minionToPlace.getMana());
                 }
             }
         }

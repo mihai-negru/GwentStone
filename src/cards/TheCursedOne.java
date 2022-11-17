@@ -59,7 +59,7 @@ public final class TheCursedOne extends Minion implements SpecialCard {
 
         affectedCard.setAttackDamage(affectedCard.getHealth());
         affectedCard.setHealth(affectedCardAttackDamage);
-        performedAnAction();
+        unleashTheBeast();
 
         return "Ok";
     }

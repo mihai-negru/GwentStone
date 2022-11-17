@@ -46,9 +46,9 @@ public final class TheRipper extends Minion implements SpecialCard {
             return "Attacked card is not of type 'Tank'.";
         }
 
-        affectedCard.subAttack(2);
+        affectedCard.makeWeaker(2);
 
-        performedAnAction();
+        unleashTheBeast();
 
         return "Ok";
     }

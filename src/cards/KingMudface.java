@@ -30,7 +30,7 @@ public final class KingMudface extends Hero {
         GwentStone.getGame()
                 .getPlayingTable()
                 .getCardsRow(posX)
-                .forEach(minion -> minion.addHealth(1));
+                .forEach(minion -> minion.makeHarder(1));
 
         performedAnAction();
 

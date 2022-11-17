@@ -42,8 +42,8 @@ public final class Disciple extends Minion implements SpecialCard {
             return "Null card.";
         }
 
-        affectedCard.addHealth(2);
-        performedAnAction();
+        affectedCard.makeHarder(2);
+        unleashTheBeast();
 
         return "Ok";
     }

@@ -27,12 +27,12 @@ public abstract class Environment implements Card {
     }
 
     @Override
-    public String getCardName() {
+    public String getName() {
         return name;
     }
 
     @Override
-    public void printJson(final ObjectNode node) {
+    public void toJson(final ObjectNode node) {
         node.put("mana", mana);
         node.put("description", description);
 
@@ -44,12 +44,12 @@ public abstract class Environment implements Card {
     }
 
     @Override
-    public boolean isFrozen() {
+    public boolean isFreezing() {
         return false;
     }
 
     @Override
-    public boolean isNormal() {
+    public boolean isMinion() {
         return false;
     }
 

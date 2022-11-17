@@ -15,7 +15,7 @@ public final class Firestorm extends Environment {
     }
 
     @Override
-    public String attack(int posX, int posY) {
+    public String attackNow(int posX, int posY) {
         if ((posX < 0) || (posX >= 4)) {
             return "Bad positions";
         }
@@ -23,7 +23,7 @@ public final class Firestorm extends Environment {
         GwentStone.getGame()
                 .getPlayingTable()
                 .getCardsRow(posX)
-                .forEach(minion -> minion.gotAttacked(1));
+                .forEach(minion -> minion.underAttack(1));
 
         GwentStone.getGame().getPlayingTable().checkTable();
 

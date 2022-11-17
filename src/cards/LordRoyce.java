@@ -43,7 +43,7 @@ public class LordRoyce extends Hero {
             return "Empty row";
         }
 
-        maxAttackDamageMinion.gotFrozen();
+        maxAttackDamageMinion.freeze();
         performedAnAction();
 
         return "Ok";

@@ -15,7 +15,7 @@ public final class HeartHound extends Environment {
     }
 
     @Override
-    public String attack(int posX, int posY) {
+    public String attackNow(int posX, int posY) {
         if ((posX < 0) || (posX >= 4)) {
             return "Bad positions";
         }

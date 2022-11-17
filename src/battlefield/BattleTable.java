@@ -1,7 +1,6 @@
 package battlefield;
 
 import cards.Minion;
-import game.GwentStone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,15 +62,15 @@ public final class BattleTable {
 
     public void resetPlayerCards(final int playerIndex) {
         if (playerIndex == 0) {
-            table.get(2).forEach(Minion::unFroze);
-            table.get(2).forEach(Minion::resetCard);
-            table.get(3).forEach(Minion::unFroze);
-            table.get(3).forEach(Minion::resetCard);
+            table.get(2).forEach(Minion::heatUp);
+            table.get(2).forEach(Minion::wakeUp);
+            table.get(3).forEach(Minion::heatUp);
+            table.get(3).forEach(Minion::wakeUp);
         } else {
-            table.get(0).forEach(Minion::unFroze);
-            table.get(0).forEach(Minion::resetCard);
-            table.get(1).forEach(Minion::unFroze);
-            table.get(1).forEach(Minion::resetCard);
+            table.get(0).forEach(Minion::heatUp);
+            table.get(0).forEach(Minion::wakeUp);
+            table.get(1).forEach(Minion::heatUp);
+            table.get(1).forEach(Minion::wakeUp);
         }
     }
 

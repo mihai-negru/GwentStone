@@ -34,14 +34,14 @@ public final class AttackCommand {
                 attackedCardX, attackedCardY)) {
             commandNode.put("error", "Attacked card does not belong to the enemy.");
             debugOutput.add(commandNode);
-        } else if (attackerCard.isFrozen()) {
+        } else if (attackerCard.isFreezing()) {
             commandNode.put("error", "Attacker card is frozen.");
             debugOutput.add(commandNode);
-        } else if (attackerCard.hasAttacked()) {
+        } else if (attackerCard.isSleeping()) {
             commandNode.put("error", "Attacker card has already attacked this turn.");
             debugOutput.add(commandNode);
         } else {
-            String errorMessage = attackerCard.attack(attackedCardX, attackedCardY);
+            String errorMessage = attackerCard.attackNow(attackedCardX, attackedCardY);
             if (!errorMessage.equals("Ok")) {
                 commandNode.put("error", errorMessage);
                 debugOutput.add(commandNode);

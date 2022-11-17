@@ -22,13 +22,13 @@ public final class HeroCommand {
 
         final int activePlayerIndex = GwentStone.getGame().getPlayingPlayerIdx();
         final PlayingPlayer activePlayer = GwentStone.getGame().getPlayer(activePlayerIndex);
-        final Hero attackingHero = activePlayer.getGameHero();
+        final Hero attackingHero = activePlayer.getHero();
 
         if (attackingHero == null) {
             return;
         }
 
-        if (attackingHero.getMana() > activePlayer.getPlayerMana()) {
+        if (attackingHero.getMana() > activePlayer.getMana()) {
             commandNode.put("error", "Not enough mana to use hero's ability.");
             debugOutput.add(commandNode);
         } else if (attackingHero.hasAttacked()) {
@@ -41,7 +41,7 @@ public final class HeroCommand {
                 commandNode.put("error", errorMessage);
                 debugOutput.add(commandNode);
             } else {
-                activePlayer.subMana(attackingHero.getMana());
+                activePlayer.loseMana(attackingHero.getMana());
             }
         }
     }

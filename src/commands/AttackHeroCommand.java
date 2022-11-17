@@ -32,10 +32,10 @@ public final class AttackHeroCommand {
             return;
         }
 
-        if (attackerCard.isFrozen()) {
+        if (attackerCard.isFreezing()) {
             commandNode.put("error", "Attacker card is frozen.");
             debugOutput.add(commandNode);
-        } else if (attackerCard.hasAttacked()) {
+        } else if (attackerCard.isSleeping()) {
             commandNode.put("error", "Attacker card has already attacked this turn.");
             debugOutput.add(commandNode);
         } else {
@@ -45,9 +45,9 @@ public final class AttackHeroCommand {
                 commandNode.put("error", "Attacked card is not of type 'Tank'.");
                 debugOutput.add(commandNode);
             } else {
-                Hero affectedHero = GwentStone.getGame().getPlayer(passivePlayer).getGameHero();
+                Hero affectedHero = GwentStone.getGame().getPlayer(passivePlayer).getHero();
                 affectedHero.gotAttacked(attackerCard.getAttackDamage());
-                attackerCard.performedAnAction();
+                attackerCard.unleashTheBeast();
 
                 if (affectedHero.getHealth() <= 0) {
                     GwentStone.getGame().stopGame();

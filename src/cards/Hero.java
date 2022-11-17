@@ -32,12 +32,12 @@ public abstract class Hero implements Card, SpecialCard {
     }
 
     @Override
-    public String getCardName() {
+    public String getName() {
         return name;
     }
 
     @Override
-    public void printJson(final ObjectNode node) {
+    public void toJson(final ObjectNode node) {
         node.put("mana", mana);
         node.put("description", description);
 
@@ -51,17 +51,17 @@ public abstract class Hero implements Card, SpecialCard {
     }
 
     @Override
-    public boolean isFrozen() {
+    public boolean isFreezing() {
         return false;
     }
 
     @Override
-    public boolean isNormal() {
+    public boolean isMinion() {
         return false;
     }
 
     @Override
-    public String attack(int posX, int posY) {
+    public String attackNow(int posX, int posY) {
         return useAbility(posX, posY);
     }
 
@@ -87,7 +87,7 @@ public abstract class Hero implements Card, SpecialCard {
         return mana;
     }
 
-    public void reset() {
+    public void wakeUp() {
         hasAttacked = false;
     }
 }

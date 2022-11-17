@@ -30,7 +30,7 @@ public final class GeneralKocioraw extends Hero {
         GwentStone.getGame()
                 .getPlayingTable()
                 .getCardsRow(posX)
-                .forEach(minion -> minion.addAttack(1));
+                .forEach(minion -> minion.makeStronger(1));
 
         performedAnAction();
 

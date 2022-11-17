@@ -159,7 +159,7 @@ public final class Deck {
     private Card copyCardInfo(final Card copyCard) {
         Card card;
 
-        String cardName = copyCard.getCardName();
+        String cardName = copyCard.getName();
 
         switch (cardName) {
             case "Berserker" -> {

@@ -32,10 +32,10 @@ public final class AbilityCommand {
             return;
         }
 
-        if (attackerCard.isFrozen()) {
+        if (attackerCard.isFreezing()) {
             commandNode.put("error", "Attacker card is frozen.");
             debugOutput.add(commandNode);
-        } else if (attackerCard.hasAttacked()) {
+        } else if (attackerCard.isSleeping()) {
             commandNode.put("error", "Attacker card has already attacked this turn.");
             debugOutput.add(commandNode);
         } else {

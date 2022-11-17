@@ -1,7 +1,5 @@
 package commands;
 
-import cards.Card;
-import cards.Environment;
 import cards.Minion;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -58,9 +56,9 @@ public final class DebugCommand {
 
         ArrayNode outputNode = commandNode.putArray("output");
 
-        player.getPlayingHand()
+        player.getHand()
                 .getCards()
-                .forEach(card -> card.printJson(outputNode.addObject()));
+                .forEach(card -> card.toJson(outputNode.addObject()));
 
         debugOutput.add(commandNode);
     }
@@ -74,9 +72,9 @@ public final class DebugCommand {
 
         ArrayNode outputNode = commandNode.putArray("output");
 
-        player.getPlayingDeck()
+        player.getDeck()
                 .getCards()
-                .forEach(card -> card.printJson(outputNode.addObject()));
+                .forEach(card -> card.toJson(outputNode.addObject()));
 
         debugOutput.add(commandNode);
     }
@@ -91,7 +89,7 @@ public final class DebugCommand {
 
         table.forEach(minions -> {
             ArrayNode minionsRow = outputNode.addArray();
-            minions.forEach(card -> card.printJson(minionsRow.addObject()));
+            minions.forEach(card -> card.toJson(minionsRow.addObject()));
         });
 
         debugOutput.add(commandNode);
@@ -103,7 +101,7 @@ public final class DebugCommand {
 
         int playerIndex = 2;
 
-        if (GwentStone.getGame().getPlayer(1).getTurn()) {
+        if (GwentStone.getGame().getPlayer(1).getStatus()) {
             playerIndex = 1;
         }
 
@@ -119,8 +117,8 @@ public final class DebugCommand {
 
         GwentStone.getGame()
                 .getPlayer(playerIndex)
-                .getGameHero()
-                .printJson(commandNode.putObject("output"));
+                .getHero()
+                .toJson(commandNode.putObject("output"));
 
         debugOutput.add(commandNode);
     }
@@ -135,7 +133,7 @@ public final class DebugCommand {
         var tableRow = GwentStone.getGame().getPlayingTable().getCards().get(posX);
 
         if (tableRow.size() > posY) {;
-            tableRow.get(posY).printJson(commandNode.putObject("output"));
+            tableRow.get(posY).toJson(commandNode.putObject("output"));
         } else {
             commandNode.put("output", "No card available at that position.");
         }
@@ -147,7 +145,7 @@ public final class DebugCommand {
         ObjectNode commandNode = debugOutput.objectNode();
         commandNode.put("command", COMMAND_SEVEN);
         commandNode.put("playerIdx", playerIndex);
-        commandNode.put("output", GwentStone.getGame().getPlayer(playerIndex).getPlayerMana());
+        commandNode.put("output", GwentStone.getGame().getPlayer(playerIndex).getMana());
 
         debugOutput.add(commandNode);
     }
@@ -161,11 +159,11 @@ public final class DebugCommand {
 
         GwentStone.getGame()
                 .getPlayer(playerIndex)
-                .getPlayingHand()
+                .getHand()
                 .getCards()
                 .stream()
-                .filter(card -> !card.isNormal())
-                .forEach(card -> card.printJson(cardsOutput.addObject()));
+                .filter(card -> !card.isMinion())
+                .forEach(card -> card.toJson(cardsOutput.addObject()));
 
         debugOutput.add(commandNode);
     }
@@ -180,8 +178,8 @@ public final class DebugCommand {
                 .getPlayingTable()
                 .getCards()
                 .forEach(minions -> minions.stream()
-                        .filter(Minion::isFrozen)
-                        .forEach(minion -> minion.printJson(cardsOutput.addObject())));
+                        .filter(Minion::isFreezing)
+                        .forEach(minion -> minion.toJson(cardsOutput.addObject())));
 
         debugOutput.add(commandNode);
     }

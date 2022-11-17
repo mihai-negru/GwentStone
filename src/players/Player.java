@@ -12,6 +12,9 @@ import java.util.List;
  * The {@code} Player acts as a database for the Player
  * containing all the gained decks and all the win games
  * from the current game.</p>
+ *
+ * @author Mihai Negru
+ * @since 1.0.0
  */
 public class Player {
     /**

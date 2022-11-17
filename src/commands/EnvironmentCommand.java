@@ -24,19 +24,19 @@ public final class EnvironmentCommand {
         commandNode.put("handIdx", action.getHandIdx());
         commandNode.put("affectedRow", action.getAffectedRow());
 
-        Card actionCard = player.getPlayingHand().getCard(action.getHandIdx());
+        Card actionCard = player.getHand().getCard(action.getHandIdx());
 
         if (actionCard == null) {
             return;
         }
 
-        if (actionCard.isNormal()) {
+        if (actionCard.isMinion()) {
             commandNode.put("error", "Chosen card is not of type environment.");
             debugOutput.add(commandNode);
         } else {
             Environment envAction = (Environment) actionCard;
 
-            if (envAction.getMana() > player.getPlayerMana()) {
+            if (envAction.getMana() > player.getMana()) {
                 commandNode.put("error", "Not enough mana to use environment card.");
                 debugOutput.add(commandNode);
             } else {
@@ -49,13 +49,13 @@ public final class EnvironmentCommand {
                 }
 
                 if (isRowValid) {
-                    String errorMessage = envAction.attack(action.getAffectedRow(), -1);
+                    String errorMessage = envAction.attackNow(action.getAffectedRow(), -1);
                     if (!errorMessage.equals("Ok")) {
                         commandNode.put("error", "Cannot steal enemy card since the player's row is full.");
                         debugOutput.add(commandNode);
                     } else {
-                        player.subMana(envAction.getMana());
-                        player.getPlayingHand().removeCard(action.getHandIdx());
+                        player.loseMana(envAction.getMana());
+                        player.getHand().removeCard(action.getHandIdx());
                     }
                 } else {
                     commandNode.put("error", "Chosen row does not belong to the enemy.");
