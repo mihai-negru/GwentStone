@@ -39,19 +39,15 @@ public final class GwentStone {
         preprocess(gameInput);
 
         for (var game : gameInput.getGames()) {
-            if (gamesPlayed > 4) {
+            if (gamesPlayed > 5) {
                 break;
             }
             start(game);
 
             while (!playingActions.noMoreActions()) {
-                if (playingActions.isNextDebugCommand()) {
-                    playingActions.solveNextDebugCommand(gameOutput);
-                } else {
-                    playerTurn(gameOutput);
-                    playerTurn(gameOutput);
-                    update();
-                }
+                playerTurn(gameOutput);
+                playerTurn(gameOutput);
+                update();
             }
 
             gamesPlayed++;
@@ -91,10 +87,7 @@ public final class GwentStone {
     }
 
     private void playerTurn(final ArrayNode gameOutput) {
-        String command = playingActions.solveNextAction(gameOutput);
-        while (!command.equals("endPlayerTurn")) {
-            command = playingActions.solveNextAction(gameOutput);
-        }
+        while (!playingActions.noMoreActions() && !playingActions.solve(gameOutput).equals("endPlayerTurn"));
 
         playingPlayers[playingPlayerIdx].setPlayerTurn();
         playingPlayers[playingPlayerIdx].unfrozeAllCards();
