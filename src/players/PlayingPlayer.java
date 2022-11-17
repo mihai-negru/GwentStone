@@ -14,6 +14,7 @@ import lombok.Setter;
  * @since 1.0.0
  */
 public final class PlayingPlayer extends Player {
+
     /**
      * <p>Instance of the {@code Hero} Object
      * that the system has chosen for the
@@ -23,18 +24,21 @@ public final class PlayingPlayer extends Player {
     @Getter
     @Setter
     private Hero hero;
+
     /**
      * <p>Chosen deck by the player
      * to play the game session.</p>
      */
     @Getter
     private Deck deck;
+
     /**
      * <p>{@code Deck} Object which maintains
      * the hand of the player.</p>
      */
     @Getter
     private Deck hand;
+
     /**
      * <p>Boolean value to show if
      * the player is active or not. If
@@ -42,6 +46,7 @@ public final class PlayingPlayer extends Player {
      * are made by it, until the turn is changed.</p>
      */
     private boolean isActive;
+
     /**
      * <p>Current player mana, needed to place
      * cards on the game table or to use

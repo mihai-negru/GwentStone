@@ -15,7 +15,7 @@ public final class KingMudface extends Hero {
     }
 
     @Override
-    public String useAbility(int posX, int posY) {
+    public String unleashTheHell(int posX, int posY) {
         if ((posX < 0) || (posX > 4)) {
             return "Bad positions";
         }
@@ -32,7 +32,7 @@ public final class KingMudface extends Hero {
                 .getCardsRow(posX)
                 .forEach(minion -> minion.makeHarder(1));
 
-        performedAnAction();
+        unleashTheBeast();
 
         return "Ok";
     }

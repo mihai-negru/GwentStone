@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @since 1.0.0
  */
 public interface Card {
+
     /**
      * <p>Extract the name from the
      * current {@code Card}.</p>

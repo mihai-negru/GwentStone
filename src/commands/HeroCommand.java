@@ -31,11 +31,11 @@ public final class HeroCommand {
         if (attackingHero.getMana() > activePlayer.getMana()) {
             commandNode.put("error", "Not enough mana to use hero's ability.");
             debugOutput.add(commandNode);
-        } else if (attackingHero.hasAttacked()) {
+        } else if (attackingHero.isSleeping()) {
             commandNode.put("error", "Hero has already attacked this turn.");
             debugOutput.add(commandNode);
         } else {
-            String errorMessage = attackingHero.useAbility(action.getAffectedRow(), -1);
+            String errorMessage = attackingHero.unleashTheHell(action.getAffectedRow(), -1);
 
             if (!errorMessage.equals("Ok")) {
                 commandNode.put("error", errorMessage);

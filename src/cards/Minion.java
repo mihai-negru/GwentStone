@@ -22,6 +22,7 @@ import java.util.Objects;
  * @since 1.0.0
  */
 public abstract class Minion implements Card {
+
     /**
      * <p>The cost of the card to
      * be placed on the table or to
@@ -141,7 +142,6 @@ public abstract class Minion implements Card {
         output.put("description", description);
 
         final ArrayNode colorsNode = output.putArray("colors");
-
         colors.forEach(colorsNode::add);
 
         output.put("name", name);
@@ -172,7 +172,7 @@ public abstract class Minion implements Card {
 
     /**
      * <p>The Minion is attacked
-     * and its health is reduces.</p>
+     * and its health is reduced.</p>
      * @param damage points to reduce from the
      *               minion health.
      */

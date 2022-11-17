@@ -15,7 +15,7 @@ public class LordRoyce extends Hero {
     }
 
     @Override
-    public String useAbility(int posX, int posY) {
+    public String unleashTheHell(int posX, int posY) {
         if ((posX < 0) || (posX > 4)) {
             return "Bad positions";
         }
@@ -44,7 +44,7 @@ public class LordRoyce extends Hero {
         }
 
         maxAttackDamageMinion.freeze();
-        performedAnAction();
+        unleashTheBeast();
 
         return "Ok";
     }

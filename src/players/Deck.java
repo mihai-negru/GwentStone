@@ -31,6 +31,7 @@ import java.util.List;
  * @since 1.0.0
  */
 public final class Deck {
+
     /**
      * The actual {@code List} of cards, that will
      * take care of cards functionality

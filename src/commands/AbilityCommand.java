@@ -39,7 +39,7 @@ public final class AbilityCommand {
             commandNode.put("error", "Attacker card has already attacked this turn.");
             debugOutput.add(commandNode);
         } else {
-            String errorMessage = ((SpecialCard) attackerCard).useAbility(attackedCardX, attackedCardY);
+            String errorMessage = ((SpecialCard) attackerCard).unleashTheHell(attackedCardX, attackedCardY);
             if (!errorMessage.equals("Ok")) {
                 commandNode.put("error", errorMessage);
                 debugOutput.add(commandNode);

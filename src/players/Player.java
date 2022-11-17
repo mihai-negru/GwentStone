@@ -17,12 +17,14 @@ import java.util.List;
  * @since 1.0.0
  */
 public class Player {
+
     /**
      * <p>Total win games from the
      * current season.</p>
      */
     @Getter
     private int winGames;
+
     /**
      * <p>Information of all available decks.</p>
      */

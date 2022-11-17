@@ -17,6 +17,7 @@ import java.util.Objects;
  * @since 1.0.0
  */
 public abstract class Environment implements Card {
+
     /**
      * <p>The cost of the card to
      * be used over a row.</p>
@@ -78,7 +79,6 @@ public abstract class Environment implements Card {
         output.put("description", description);
 
         final ArrayNode colorsNode = output.putArray("colors");
-
         colors.forEach(colorsNode::add);
 
         output.put("name", name);

@@ -15,7 +15,7 @@ public final class EmpressThorina extends Hero {
     }
 
     @Override
-    public String useAbility(int posX, int posY) {
+    public String unleashTheHell(int posX, int posY) {
         if ((posX < 0) || (posX > 4)) {
             return "Bad positions";
         }
@@ -47,7 +47,7 @@ public final class EmpressThorina extends Hero {
         }
 
         GwentStone.getGame().getPlayingTable().removeCard(posX, minionIndex);
-        performedAnAction();
+        unleashTheBeast();
 
         return "Ok";
     }

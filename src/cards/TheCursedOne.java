@@ -26,7 +26,7 @@ public final class TheCursedOne extends Minion implements SpecialCard {
     }
 
     @Override
-    public String useAbility(int posX, int posY) {
+    public String unleashTheHell(int posX, int posY) {
         if ((posX < 0) || (posX > 4) || (posY < 0) || (posY > 5)) {
             return "Bad positions";
         }

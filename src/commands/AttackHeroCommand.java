@@ -46,7 +46,7 @@ public final class AttackHeroCommand {
                 debugOutput.add(commandNode);
             } else {
                 Hero affectedHero = GwentStone.getGame().getPlayer(passivePlayer).getHero();
-                affectedHero.gotAttacked(attackerCard.getAttackDamage());
+                affectedHero.underAttack(attackerCard.getAttackDamage());
                 attackerCard.unleashTheBeast();
 
                 if (affectedHero.getHealth() <= 0) {
