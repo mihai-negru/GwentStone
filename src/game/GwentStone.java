@@ -39,7 +39,7 @@ public final class GwentStone {
         preprocess(gameInput);
 
         for (var game : gameInput.getGames()) {
-            if (gamesPlayed > 8) {
+            if (gamesPlayed > 9) {
                 break;
             }
             start(game);

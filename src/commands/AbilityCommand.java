@@ -20,7 +20,7 @@ public final class AbilityCommand {
         final int attackedCardY = action.getCardAttacked().getY();
 
         ObjectNode commandNode = debugOutput.objectNode();
-        commandNode.put("command", "cardUsesAttack");
+        commandNode.put("command", "cardUsesAbility");
         commandNode.putObject("cardAttacker").put("x", action.getCardAttacker().getX()).put("y",
                 action.getCardAttacker().getY());
         commandNode.putObject("cardAttacked").put("x", attackedCardX).put("y", attackedCardY);
@@ -40,7 +40,7 @@ public final class AbilityCommand {
             debugOutput.add(commandNode);
         } else {
             String errorMessage = ((SpecialCard) attackerCard).useAbility(attackedCardX, attackedCardY);
-            if (!errorMessage.equals("ok")) {
+            if (!errorMessage.equals("Ok")) {
                 commandNode.put("error", errorMessage);
                 debugOutput.add(commandNode);
             }

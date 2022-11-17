@@ -96,9 +96,31 @@ public abstract class Minion implements Card {
     public void subAttack(final int points) {
         if (attackDamage <= points) {
             attackDamage = 0;
+        } else {
+            attackDamage -= points;
         }
+    }
 
-        attackDamage -= points;
+    public void addHealth(final int points) {
+        if (points >= 0) {
+            health += points;
+        }
+    }
+
+    public void setHealth(final int newHealth) {
+        if (newHealth > 0) {
+            health = newHealth;
+        }
+    }
+
+    public void setAttackDamage(final int newAttackDamage) {
+        if (newAttackDamage >= 0) {
+            attackDamage = newAttackDamage;
+        }
+    }
+
+    public int getAttackDamage() {
+        return attackDamage;
     }
 
     @Override
