@@ -14,6 +14,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @since 1.0.0
  */
 public interface Card {
+    /**
+     * <p>Max row to take a card from table.</p>
+     */
+    int MAX_ROW = 4;
+
+    /**
+     * <p>Max column to take a card from table.</p>
+     */
+    int MAX_COLUMN = 5;
 
     /**
      * <p>Extract the name from the
