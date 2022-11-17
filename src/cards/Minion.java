@@ -24,6 +24,16 @@ import java.util.Objects;
 public abstract class Minion implements Card {
 
     /**
+     * <p>Max row to take a card from table.</p>
+     */
+    protected static final int MAX_ROW = 4;
+
+    /**
+     * <p>Max column to take a card from table.</p>
+     */
+    protected static final int MAX_COLUMN = 5;
+
+    /**
      * <p>The cost of the card to
      * be placed on the table or to
      * use an special ability.</p>
