@@ -66,4 +66,12 @@ public final class PlayingPlayer extends Player {
         playerMana += mana;
     }
     public void subMana(final int mana) {playerMana -= mana;}
+
+    public void resetHero() {
+        gameHero.reset();
+    }
+
+    public void resetMana() {
+        playerMana = 0;
+    }
 }

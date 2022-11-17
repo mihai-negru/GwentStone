@@ -3,6 +3,7 @@ package actions;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.*;
 import fileio.ActionsInput;
+import game.GwentStone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,9 @@ public class Action {
         if (action.getCommand().startsWith("get")) {
             solveNextDebugCommand(gameOutput, action);
         } else {
-            solveNextAction(gameOutput, action);
+            if (GwentStone.getGame().getStatus()) {
+                solveNextAction(gameOutput, action);
+            }
         }
 
         return action.getCommand();
@@ -37,6 +40,7 @@ public class Action {
             case "cardUsesAttack" -> AttackCommand.solveCommand(gameOutput, action);
             case "cardUsesAbility" -> AbilityCommand.solveCommand(gameOutput, action);
             case "useAttackHero" -> AttackHeroCommand.solveCommand(gameOutput, action);
+            case "useHeroAbility" -> HeroCommand.solveCommand(gameOutput, action);
         }
     }
 

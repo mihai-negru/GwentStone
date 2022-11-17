@@ -189,7 +189,7 @@ public final class DebugCommand {
     private static void getTotalGamesPlayed(final ArrayNode statOutput) {
         ObjectNode commandNode = statOutput.objectNode();
         commandNode.put("command", COMMAND_TEN);
-        commandNode.put("output", GwentStone.getGame().getPlayer(1).getPlayedGames());
+        commandNode.put("output", GwentStone.getGame().getPlayedGames());
         statOutput.add(commandNode);
     }
 

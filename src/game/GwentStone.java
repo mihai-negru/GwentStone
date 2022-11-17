@@ -21,8 +21,7 @@ public final class GwentStone {
     private int playingPlayerIdx;
 
     private boolean gameIsAlive;
-
-    private int gamesPlayed = 1;
+    private int playedGames;
 
     private GwentStone() {
         playingPlayers = new PlayingPlayer[2];
@@ -41,9 +40,6 @@ public final class GwentStone {
         preprocess(gameInput);
 
         for (var game : gameInput.getGames()) {
-            if (gamesPlayed > 11) {
-                break;
-            }
             start(game);
 
             while (!playingActions.noMoreActions()) {
@@ -52,20 +48,21 @@ public final class GwentStone {
                 update();
             }
 
-            gamesPlayed++;
-
             exit();
         }
+
+        System.out.println("----------------------");
     }
 
     private void preprocess(final Input gameInput) {
-        manaIncrementor = 1;
-        playingPlayerIdx = -1;
         playingPlayers[0] = new PlayingPlayer(gameInput.getPlayerOneDecks());
         playingPlayers[1] = new PlayingPlayer(gameInput.getPlayerTwoDecks());
+        playedGames = 1;
     }
 
     private void start(final GameInput startInput) {
+        manaIncrementor = 1;
+
         playingPlayers[0].setPlayerPlayingDeck(startInput.getStartGame().getPlayerOneDeckIdx());
         playingPlayers[1].setPlayerPlayingDeck(startInput.getStartGame().getPlayerTwoDeckIdx());
 
@@ -94,27 +91,36 @@ public final class GwentStone {
         while (!playingActions.noMoreActions() && !playingActions.solve(gameOutput).equals(
                 "endPlayerTurn")) {}
 
-        playingPlayers[playingPlayerIdx].setPlayerTurn();
-        playingTable.resetPlayerCards(playingPlayerIdx);
-        playingPlayerIdx = (playingPlayerIdx + 1) % 2;
-        playingPlayers[playingPlayerIdx].setPlayerTurn();
+        if (gameIsAlive) {
+            playingPlayers[playingPlayerIdx].setPlayerTurn();
+            playingPlayers[playingPlayerIdx].resetHero();
+            playingTable.resetPlayerCards(playingPlayerIdx);
+            playingPlayerIdx = (playingPlayerIdx + 1) % 2;
+            playingPlayers[playingPlayerIdx].setPlayerTurn();
+        }
     }
 
     private void update() {
-        if (manaIncrementor < 10) {
-            ++manaIncrementor;
+        if (gameIsAlive) {
+            if (manaIncrementor < 10) {
+                ++manaIncrementor;
+            }
+
+            playingPlayers[0].addCardToPlayerHand();
+            playingPlayers[1].addCardToPlayerHand();
+
+            playingPlayers[0].addMana(manaIncrementor);
+            playingPlayers[1].addMana(manaIncrementor);
         }
-
-        playingPlayers[0].addCardToPlayerHand();
-        playingPlayers[1].addCardToPlayerHand();
-
-        playingPlayers[0].addMana(manaIncrementor);
-        playingPlayers[1].addMana(manaIncrementor);
     }
 
     private void exit() {
         playingTable.clearTable();
-        System.out.println("--------------------------");
+        playingPlayers[0].resetMana();
+        playingPlayers[1].resetMana();
+
+        ++playedGames;
+        System.out.println("Game finished");
     }
 
     private Hero aNewHeroIsBorn(final CardInput heroCard) {
@@ -149,5 +155,13 @@ public final class GwentStone {
 
     public void stopGame() {
         gameIsAlive = false;
+    }
+
+    public boolean getStatus() {
+        return gameIsAlive;
+    }
+
+    public int getPlayedGames() {
+        return playedGames;
     }
 }

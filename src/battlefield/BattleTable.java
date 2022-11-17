@@ -64,13 +64,13 @@ public final class BattleTable {
     public void resetPlayerCards(final int playerIndex) {
         if (playerIndex == 0) {
             table.get(2).forEach(Minion::unFroze);
-            table.get(3).forEach(Minion::unFroze);
             table.get(2).forEach(Minion::resetCard);
+            table.get(3).forEach(Minion::unFroze);
             table.get(3).forEach(Minion::resetCard);
         } else {
             table.get(0).forEach(Minion::unFroze);
-            table.get(1).forEach(Minion::unFroze);
             table.get(0).forEach(Minion::resetCard);
+            table.get(1).forEach(Minion::unFroze);
             table.get(1).forEach(Minion::resetCard);
         }
     }

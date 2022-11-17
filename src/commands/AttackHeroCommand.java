@@ -52,7 +52,13 @@ public final class AttackHeroCommand {
                 if (affectedHero.getHealth() <= 0) {
                     GwentStone.getGame().stopGame();
 
-                    debugOutput.addObject().put("gameEnded", "Player one killed the enemy hero.");
+                    if (activePlayer == 1) {
+                        debugOutput.addObject().put("gameEnded", "Player one killed the enemy hero.");
+                    } else {
+                        debugOutput.addObject().put("gameEnded", "Player two killed the enemy hero.");
+                    }
+
+                    GwentStone.getGame().getPlayer(activePlayer).addWinGames();
                 }
             }
         }

@@ -14,12 +14,15 @@ public abstract class Hero implements Card, SpecialCard {
     private final String name;
     private final List<String> colors;
 
+    private boolean hasAttacked;
+
     public Hero(final int initMana, final String initDescription, final String initName,
                 final List<String> initColors) {
         mana = initMana;
         description = Objects.requireNonNullElse(initDescription, "No description");
         name = Objects.requireNonNullElse(initName, "No name");
         health = 30;
+        hasAttacked = false;
         colors = new ArrayList<>(initColors);
     }
 
@@ -70,5 +73,21 @@ public abstract class Hero implements Card, SpecialCard {
 
     public int getHealth() {
         return health;
+    }
+
+    public boolean hasAttacked() {
+        return hasAttacked;
+    }
+
+    public void performedAnAction() {
+        hasAttacked = true;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void reset() {
+        hasAttacked = false;
     }
 }
