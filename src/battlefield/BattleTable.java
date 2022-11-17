@@ -1,6 +1,7 @@
 package battlefield;
 
 import cards.Minion;
+import game.GwentStone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,5 +91,15 @@ public final class BattleTable {
 
         return table.get(rowIndex).stream()
                 .anyMatch(Minion::isTank);
+    }
+
+    public boolean notAttackedATank(final Minion minion , final int posX) {
+        if (minion == null) {
+            return false;
+        }
+
+        return !minion.isTank()
+                && ((((posX == 0) || (posX == 1)) && GwentStone.getGame().getPlayingTable().rowHasTanks(1))
+                || (((posX == 2) || (posX == 3)) && GwentStone.getGame().getPlayingTable().rowHasTanks(2)));
     }
 }

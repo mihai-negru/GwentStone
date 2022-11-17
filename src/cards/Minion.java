@@ -102,31 +102,29 @@ public abstract class Minion implements Card {
     }
 
     @Override
-    public boolean attack(int posX, int posY) {
+    public String attack(int posX, int posY) {
         Minion attackedCard = GwentStone.getGame().getPlayingTable().getCard(posX, posY);
 
         if (attackedCard == null) {
-            return false;
+            return "Null card";
         }
 
-        if (!attackedCard.isTank()) {
-            if (((posX == 0) || (posX == 1)) && GwentStone.getGame().getPlayingTable().rowHasTanks(1)) {
-                return false;
-            } else {
-                if (((posX == 2) || (posX == 3)) && GwentStone.getGame().getPlayingTable().rowHasTanks(2)) {
-                    return false;
-                }
-            }
+        if (GwentStone.getGame().getPlayingTable().notAttackedATank(attackedCard, posX)) {
+            return "Attacked card is not of type 'Tank'.";
         }
 
         attackedCard.gotAttacked(attackDamage);
         hasAttacked = true;
 
         if (attackedCard.getHealth() <= 0) {
-            return GwentStone.getGame().getPlayingTable().removeCard(posX, posY);
+            if (GwentStone.getGame().getPlayingTable().removeCard(posX, posY)) {
+                return "Ok";
+            }
+
+            return "Could not remove card";
         }
 
-        return true;
+        return "Ok";
     }
 
     //    @Override

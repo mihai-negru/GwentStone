@@ -58,7 +58,12 @@ public abstract class Hero implements Card, SpecialCard {
     }
 
     @Override
-    public boolean attack(int posX, int posY) {
-        return false;
+    public String attack(int posX, int posY) {
+        return "Ok";
+    }
+
+    @Override
+    public String useAbility(int posX, int posY) {
+        return "null";
     }
 }

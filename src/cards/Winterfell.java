@@ -15,9 +15,9 @@ public final class Winterfell extends Environment {
     }
 
     @Override
-    public boolean attack(int posX, int posY) {
+    public String attack(int posX, int posY) {
         if ((posX < 0) || (posX >= 4)) {
-            return false;
+            return "Bad positions";
         }
 
         GwentStone.getGame()
@@ -25,6 +25,6 @@ public final class Winterfell extends Environment {
                 .getCardsRow(posX)
                 .forEach(Minion::gotFrozen);
 
-        return true;
+        return "Ok";
     }
 }

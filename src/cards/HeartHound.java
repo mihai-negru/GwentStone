@@ -15,9 +15,9 @@ public final class HeartHound extends Environment {
     }
 
     @Override
-    public boolean attack(int posX, int posY) {
+    public String attack(int posX, int posY) {
         if ((posX < 0) || (posX >= 4)) {
-            return false;
+            return "Bad positions";
         }
 
         int newRow = -1;
@@ -34,7 +34,7 @@ public final class HeartHound extends Environment {
         var insertRowTable = GwentStone.getGame().getPlayingTable().getCardsRow(newRow);
 
         if (insertRowTable.size() >= 5) {
-            return false;
+            return "Bad positions";
         }
 
         var rowTable = GwentStone.getGame().getPlayingTable().getCardsRow(posX);
@@ -52,6 +52,8 @@ public final class HeartHound extends Environment {
             ++iterIndex;
         }
 
-        return insertRowTable.add(rowTable.remove(maxHealthMinionIndex));
+        insertRowTable.add(rowTable.remove(maxHealthMinionIndex));
+
+        return "Ok";
     }
 }

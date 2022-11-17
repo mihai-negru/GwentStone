@@ -8,5 +8,5 @@ public interface Card {
     boolean isFrozen();
     boolean isNormal();
 
-    boolean attack(int posX, int posY);
+    String attack(int posX, int posY);
 }

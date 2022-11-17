@@ -21,4 +21,9 @@ public final class TheRipper extends Minion implements SpecialCard {
     public boolean isTank() {
         return false;
     }
+
+    @Override
+    public String useAbility(int posX, int posY) {
+        return "Ok";
+    }
 }
