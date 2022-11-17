@@ -16,4 +16,9 @@ public final class Disciple extends Minion implements SpecialCard {
     public boolean inFrontRow() {
         return false;
     }
+
+    @Override
+    public boolean isTank() {
+        return false;
+    }
 }

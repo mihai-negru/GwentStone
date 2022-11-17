@@ -2,6 +2,7 @@ package cards;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import game.GwentStone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public abstract class Minion implements Card {
     protected int health;
     protected int attackDamage;
     protected boolean isFrozen;
+    protected boolean hasAttacked;
     protected final String description;
     protected final String name;
     protected final List<String> colors;
@@ -23,6 +25,7 @@ public abstract class Minion implements Card {
         health = initHealth;
         attackDamage = initAttackDamage;
         isFrozen = false;
+        hasAttacked = false;
         description = Objects.requireNonNullElse(initDescription, "No description");
         name = Objects.requireNonNullElse(initName, "No name");
         colors = new ArrayList<>(initColors);
@@ -46,9 +49,8 @@ public abstract class Minion implements Card {
         node.put("description", description);
 
         ArrayNode colorsNode = node.putArray("colors");
-        for (var color : colors) {
-            colorsNode.add(color);
-        }
+
+        colors.forEach(colorsNode::add);
 
         node.put("name", name);
     }
@@ -74,19 +76,60 @@ public abstract class Minion implements Card {
     public void gotFrozen() {
         isFrozen = true;
     }
+    public void unFroze() {isFrozen = false;}
 
     public int getHealth() {
         return health;
     }
 
     abstract public boolean inFrontRow();
+    abstract public boolean isTank();
 
-    @Override
-    public boolean useAbility(int posX, int posY) {
-        return false;
+    public boolean hasAttacked() {
+        return hasAttacked;
     }
 
-//    @Override
+    public void resetCard() {
+        hasAttacked = false;
+    }
+
+    public void subAttack(final int points) {
+        if (attackDamage <= points) {
+            attackDamage = 0;
+        }
+
+        attackDamage -= points;
+    }
+
+    @Override
+    public boolean attack(int posX, int posY) {
+        Minion attackedCard = GwentStone.getGame().getPlayingTable().getCard(posX, posY);
+
+        if (attackedCard == null) {
+            return false;
+        }
+
+        if (!attackedCard.isTank()) {
+            if (((posX == 0) || (posX == 1)) && GwentStone.getGame().getPlayingTable().rowHasTanks(1)) {
+                return false;
+            } else {
+                if (((posX == 2) || (posX == 3)) && GwentStone.getGame().getPlayingTable().rowHasTanks(2)) {
+                    return false;
+                }
+            }
+        }
+
+        attackedCard.gotAttacked(attackDamage);
+        hasAttacked = true;
+
+        if (attackedCard.getHealth() <= 0) {
+            return GwentStone.getGame().getPlayingTable().removeCard(posX, posY);
+        }
+
+        return true;
+    }
+
+    //    @Override
 //    public boolean equals(Object obj) {
 //        if (obj == null) {
 //            return false;

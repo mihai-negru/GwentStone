@@ -17,4 +17,9 @@ public final class TheCursedOne extends Minion implements SpecialCard {
     public boolean inFrontRow() {
         return false;
     }
+
+    @Override
+    public boolean isTank() {
+        return false;
+    }
 }

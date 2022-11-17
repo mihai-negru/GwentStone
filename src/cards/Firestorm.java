@@ -1,6 +1,5 @@
 package cards;
 
-import battlefield.BattleTable;
 import game.GwentStone;
 
 import java.util.List;
@@ -16,16 +15,15 @@ public final class Firestorm extends Environment {
     }
 
     @Override
-    public boolean useAbility(int posX, int posY) {
+    public boolean attack(int posX, int posY) {
         if ((posX < 0) || (posX >= 4)) {
             return false;
         }
 
-        var rowTable = GwentStone.getGame().getPlayingTable().getCardsRow(posX);
-
-        for (var minion : rowTable) {
-            minion.gotAttacked(1);
-        }
+        GwentStone.getGame()
+                .getPlayingTable()
+                .getCardsRow(posX)
+                .forEach(minion -> minion.gotAttacked(1));
 
         GwentStone.getGame().getPlayingTable().checkTable();
 

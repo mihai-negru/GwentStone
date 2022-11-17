@@ -16,4 +16,9 @@ public final class Miraj extends Minion implements SpecialCard {
     public boolean inFrontRow() {
         return true;
     }
+
+    @Override
+    public boolean isTank() {
+        return false;
+    }
 }

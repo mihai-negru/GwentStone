@@ -16,4 +16,9 @@ public final class Sentinel extends Minion {
     public boolean inFrontRow() {
         return false;
     }
+
+    @Override
+    public boolean isTank() {
+        return false;
+    }
 }

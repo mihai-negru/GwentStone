@@ -49,7 +49,7 @@ public final class EnvironmentCommand {
                 }
 
                 if (isRowValid) {
-                    if (!envAction.useAbility(action.getAffectedRow(), -1)) {
+                    if (!envAction.attack(action.getAffectedRow(), -1)) {
                         commandNode.put("error", "Cannot steal enemy card since the player's row is full.");
                         debugOutput.add(commandNode);
                     } else {

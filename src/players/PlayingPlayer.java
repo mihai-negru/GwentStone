@@ -66,8 +66,4 @@ public final class PlayingPlayer extends Player {
         playerMana += mana;
     }
     public void subMana(final int mana) {playerMana -= mana;}
-
-    public void unfrozeAllCards() {
-
-    }
 }

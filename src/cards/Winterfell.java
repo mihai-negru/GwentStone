@@ -15,16 +15,15 @@ public final class Winterfell extends Environment {
     }
 
     @Override
-    public boolean useAbility(int posX, int posY) {
+    public boolean attack(int posX, int posY) {
         if ((posX < 0) || (posX >= 4)) {
             return false;
         }
 
-        var rowTable = GwentStone.getGame().getPlayingTable().getCardsRow(posX);
-
-        for (var minion : rowTable) {
-            minion.gotFrozen();
-        }
+        GwentStone.getGame()
+                .getPlayingTable()
+                .getCardsRow(posX)
+                .forEach(Minion::gotFrozen);
 
         return true;
     }

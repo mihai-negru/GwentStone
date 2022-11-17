@@ -2,6 +2,7 @@ package commands;
 
 import cards.Card;
 import cards.Environment;
+import cards.Minion;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
@@ -55,10 +56,11 @@ public final class DebugCommand {
         commandNode.put("command", COMMAND_ONE);
         commandNode.put("playerIdx", playerIndex);
 
-        ArrayNode cardsOutput = commandNode.putArray("output");
-        for (Card card : player.getPlayingHand().getCards()) {
-            card.printJson(cardsOutput.addObject());
-        }
+        ArrayNode outputNode = commandNode.putArray("output");
+
+        player.getPlayingHand()
+                .getCards()
+                .forEach(card -> card.printJson(outputNode.addObject()));
 
         debugOutput.add(commandNode);
     }
@@ -70,10 +72,11 @@ public final class DebugCommand {
         commandNode.put("command", COMMAND_TWO);
         commandNode.put("playerIdx", playerIndex);
 
-        ArrayNode cardsOutput = commandNode.putArray("output");
-        for (Card card : player.getPlayingDeck().getCards()) {
-            card.printJson(cardsOutput.addObject());
-        }
+        ArrayNode outputNode = commandNode.putArray("output");
+
+        player.getPlayingDeck()
+                .getCards()
+                .forEach(card -> card.printJson(outputNode.addObject()));
 
         debugOutput.add(commandNode);
     }
@@ -84,14 +87,12 @@ public final class DebugCommand {
         ObjectNode commandNode = debugOutput.objectNode();
         commandNode.put("command", COMMAND_THREE);
 
-        ArrayNode cardsOutput = commandNode.putArray("output");
-        for (var row : table) {
-            ArrayNode rowCards = cardsOutput.arrayNode();
-            for (var card : row) {
-                card.printJson(rowCards.addObject());
-            }
-            cardsOutput.add(rowCards);
-        }
+        ArrayNode outputNode = commandNode.putArray("output");
+
+        table.forEach(minions -> {
+            ArrayNode minionsRow = outputNode.addArray();
+            minions.forEach(card -> card.printJson(minionsRow.addObject()));
+        });
 
         debugOutput.add(commandNode);
     }
@@ -116,7 +117,10 @@ public final class DebugCommand {
         commandNode.put("command", COMMAND_FIVE);
         commandNode.put("playerIdx", playerIndex);
 
-        GwentStone.getGame().getPlayer(playerIndex).getGameHero().printJson(commandNode.putObject("output"));
+        GwentStone.getGame()
+                .getPlayer(playerIndex)
+                .getGameHero()
+                .printJson(commandNode.putObject("output"));
 
         debugOutput.add(commandNode);
     }
@@ -133,7 +137,7 @@ public final class DebugCommand {
         if (tableRow.size() > posY) {;
             tableRow.get(posY).printJson(commandNode.putObject("output"));
         } else {
-            commandNode.put("output", "No card at that position.");
+            commandNode.put("output", "No card available at that position.");
         }
 
         debugOutput.add(commandNode);
@@ -155,31 +159,29 @@ public final class DebugCommand {
 
         ArrayNode cardsOutput = commandNode.putArray("output");
 
-        var handCards = GwentStone.getGame().getPlayer(playerIndex).getPlayingHand().getCards();
-
-        for (var card : handCards) {
-            if (!card.isNormal()) {
-                card.printJson(cardsOutput.addObject());
-            }
-        }
+        GwentStone.getGame()
+                .getPlayer(playerIndex)
+                .getPlayingHand()
+                .getCards()
+                .stream()
+                .filter(card -> !card.isNormal())
+                .forEach(card -> card.printJson(cardsOutput.addObject()));
 
         debugOutput.add(commandNode);
     }
 
     public static void getFrozenCardsOnTable(final ArrayNode debugOutput) {
-        var table = GwentStone.getGame().getPlayingTable().getCards();
-
         ObjectNode commandNode = debugOutput.objectNode();
         commandNode.put("command", COMMAND_NINE);
 
         ArrayNode cardsOutput = commandNode.putArray("output");
-        for (var row : table) {
-            for (var card : row) {
-                if (card.isFrozen()) {
-                    card.printJson(cardsOutput.addObject());
-                }
-            }
-        }
+
+        GwentStone.getGame()
+                .getPlayingTable()
+                .getCards()
+                .forEach(minions -> minions.stream()
+                        .filter(Minion::isFrozen)
+                        .forEach(minion -> minion.printJson(cardsOutput.addObject())));
 
         debugOutput.add(commandNode);
     }

@@ -37,9 +37,8 @@ public abstract class Environment implements Card {
         node.put("description", description);
 
         ArrayNode colorsNode = node.putArray("colors");
-        for (var color : colors) {
-            colorsNode.add(color);
-        }
+
+        colors.forEach(colorsNode::add);
 
         node.put("name", name);
     }

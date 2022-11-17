@@ -1,6 +1,7 @@
 package actions;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import commands.AttackCommand;
 import commands.BattleTableCommand;
 import commands.DebugCommand;
 import commands.EnvironmentCommand;
@@ -23,6 +24,8 @@ public class Action {
     public String solve(final ArrayNode gameOutput) {
         var action = actions.remove(0);
 
+        System.out.println("processing: " + action.getCommand());
+
         if (action.getCommand().startsWith("get")) {
             solveNextDebugCommand(gameOutput, action);
         } else {
@@ -36,6 +39,7 @@ public class Action {
         switch (action.getCommand()) {
             case "placeCard" -> BattleTableCommand.solveCommand(gameOutput, action);
             case "useEnvironmentCard" -> EnvironmentCommand.solveCommand(gameOutput, action);
+            case "cardUsesAttack" -> AttackCommand.solveCommand(gameOutput, action);
         }
     }
 

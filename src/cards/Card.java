@@ -1,6 +1,5 @@
 package cards;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public interface Card {
@@ -9,5 +8,5 @@ public interface Card {
     boolean isFrozen();
     boolean isNormal();
 
-    boolean useAbility(int posX, int posY);
+    boolean attack(int posX, int posY);
 }

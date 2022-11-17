@@ -2,7 +2,6 @@ package cards;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import fileio.CardInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ public abstract class Hero implements Card, SpecialCard {
     }
 
     @Override
-    public boolean useAbility(int posX, int posY) {
+    public boolean attack(int posX, int posY) {
         return false;
     }
 }
