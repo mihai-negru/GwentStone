@@ -140,7 +140,7 @@ public abstract class Minion implements Card {
         output.put("health", health);
         output.put("description", description);
 
-        ArrayNode colorsNode = output.putArray("colors");
+        final ArrayNode colorsNode = output.putArray("colors");
 
         colors.forEach(colorsNode::add);
 
@@ -280,20 +280,20 @@ public abstract class Minion implements Card {
      */
     @Override
     public String attackNow(final int cardX, final int cardY) {
-        Minion attackedCard = GwentStone.getGame().getPlayingTable().getCard(cardX, cardY);
+        final Minion minionToAttack = GwentStone.getGame().getPlayingTable().getCard(cardX, cardY);
 
-        if (attackedCard == null) {
+        if (minionToAttack == null) {
             return "Null card.";
         }
 
-        if (GwentStone.getGame().getPlayingTable().notAttackedATank(attackedCard, cardX)) {
+        if (GwentStone.getGame().getPlayingTable().notAttackedATank(minionToAttack, cardX)) {
             return "Attacked card is not of type 'Tank'.";
         }
 
         unleashTheBeast();
-        attackedCard.underAttack(attackDamage);
+        minionToAttack.underAttack(attackDamage);
 
-        if (attackedCard.getHealth() <= 0) {
+        if (minionToAttack.getHealth() <= 0) {
             if (GwentStone.getGame().getPlayingTable().removeCard(cardX, cardY)) {
                 return "Ok";
             }
