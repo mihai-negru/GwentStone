@@ -8,4 +8,6 @@ public interface Card {
     void printJson(ObjectNode node);
     boolean isFrozen();
     boolean isNormal();
+
+    boolean useAbility(int posX, int posY);
 }

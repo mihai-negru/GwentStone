@@ -53,4 +53,8 @@ public abstract class Environment implements Card {
     public boolean isNormal() {
         return false;
     }
+
+    public int getMana() {
+        return mana;
+    }
 }

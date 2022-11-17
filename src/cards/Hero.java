@@ -57,4 +57,9 @@ public abstract class Hero implements Card, SpecialCard {
     public boolean isNormal() {
         return false;
     }
+
+    @Override
+    public boolean useAbility(int posX, int posY) {
+        return false;
+    }
 }

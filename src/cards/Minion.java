@@ -67,5 +67,50 @@ public abstract class Minion implements Card {
         return mana;
     }
 
+    public void gotAttacked(final int attackDamage) {
+        health -= attackDamage;
+    }
+
+    public void gotFrozen() {
+        isFrozen = true;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
     abstract public boolean inFrontRow();
+
+    @Override
+    public boolean useAbility(int posX, int posY) {
+        return false;
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//
+//        if (obj instanceof Minion aMinion) {
+//            boolean firstCheck =  (mana == aMinion.mana) &&
+//                    (health == aMinion.health) &&
+//                    (attackDamage == aMinion.attackDamage) &&
+//                    (isFrozen == aMinion.isFrozen) &&
+//                    (description.equals(aMinion.description)) &&
+//                    (name.equals(aMinion.name));
+//
+//            if (firstCheck) {
+//                if (colors.size() != aMinion.colors.size()) {
+//                    return false;
+//                }
+//
+//
+//            }
+//
+//            return firstCheck;
+//        }
+//
+//        return false;
+//    }
 }
