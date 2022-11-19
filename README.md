@@ -14,6 +14,9 @@ True based story about two famous games **Heartstone** and **Gwent**.
    2. [ULM Schema](#cards-ulm-desc)
    3. [Explaining the ULM](#cards-expl-desc)
 5. [Players Package](#players-desc)
+   1. [Description](#players-desc-desc)
+   2. [ULM Schema](#players-ulm-desc)
+   3. [Explaining the ULM](#players-expl-desc)
 6. [Battlefield Package](#battle-desc)
 7. [Commands Package](#commands-desc)
 8. [Actions Package](#actions-desc)
@@ -24,7 +27,7 @@ True based story about two famous games **Heartstone** and **Gwent**.
 
 
 <a name="start-desc-desc"></a>
-### Description
+### **Description**
 
 Basically this task is to test our knowledge about basic *OOP* concepts.
 Even if I have some practice working with Java and *OOP* concepts, I found this
@@ -133,6 +136,71 @@ card cannot be frozen.
 
 <a name="players-desc"></a>
 ## **Players Package**
+
+
+<a name="players-desc-desc"></a>
+### **Description**
+
+Because no game exists without players, I created some functionalities for basic
+players. This package as **cards** package does not communicate very much with the
+extern classes (in order words it does not call or create instances of objects from
+other packages).
+
+>**NOTE:** Even though I told you that the package tries not to work with extern packages
+> it would be a lie. In order to process input data we have to communicate with a third-party
+> class (the classes from the **fileio** package), however the communication is very low
+> and is only needed at constructors when we initialize the objects.
+
+<a name="players-ulm-desc"></a>
+### **ULM Schema**
+
+![players ulm schema](images/players-hierarchy.jpg)
+
+
+<a name="players-expl-desc"></a>
+### **Explaining the ULM**
+
+For this design I chose not to work with abstract classes or interfaces, because
+it would be unuseful. In every game a player can exist by its own (even though
+for this game we do not call explicit the Player constructor, we use it for the **PlayingPlayer**
+class which will be the most important class from entire game).
+
+The **Player** class is a collection of data, about the player that will want in some time
+to play a game. The class stores all the decks that are available for the user and the win games.
+I tried to keep it as simple I could, because we will not be using this class
+very much, however and is very important for the flow of thoughts and to strengthen the
+logic behind the game.
+
+>**NOTE:** In future if we would like to add some more functionalities than
+> it would be easier to change something in the Player class instead of working on
+> the PlayingPlayers class or even the Deck class. The Player class is more to break
+> the logic code in some steps to achive a bigger goal.
+
+The next class, **Deck** as it name suggests it's a collection of some cards,
+which makes the entire deck. The Deck Object can be created with **3** methods:
+* *From input data*
+* *From another deck data*
+* *Create an empty deck* - this method will be useful when we will create the
+* player hand, and we would like to have no card until the game is started.
+
+Behind the scenes the **Deck** class is just a simple *wrapper* class for the *List and ArrayList*
+structures. We want to keep the functionality of adding removing or changing some cards
+in the Deck class and not to expose them to the world.
+
+The last class is **PlayingPlayer** which has two relations with the classes discussed above:
+* *With Deck* - Aggregation
+* *With Player* - Inheritance
+
+We want that every **playing player** will have a deck to takes cards from
+and a hand to put his cards. For this functionality to work we need to have some decks.
+On the other hand a player cannot play if it is not a player, for this we need to
+inherit the **Player** class and to give **basic** functionalities to a player.
+
+>**NOTE:** As I mentioned above the whole Player structure is found in the **PlayingPlayer**
+> , because the playing player can have an allocated hero *which a simple player cannot have)
+> it also can choose a deck to play the game session it can be his turn or not and
+> finally it can gain mana for the game or can lose it. This is the strongest reson
+> why I have created the **PlayingPlayer** class.
 
 
 <a name="battle-desc"></a>
