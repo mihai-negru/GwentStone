@@ -48,7 +48,7 @@ public final class Firestorm extends Environment {
 
         GwentStone.getGame()
                 .getTable()
-                .getCardsRow(cardX)
+                .getRow(cardX)
                 .forEach(minion -> minion.underAttack(1));
 
         GwentStone.getGame().getTable().checkTable();

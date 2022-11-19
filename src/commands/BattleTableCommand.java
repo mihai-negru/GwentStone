@@ -53,7 +53,7 @@ public final class BattleTableCommand {
                 }
 
 
-                if (!GwentStone.getGame().getTable().addCardToTable(minionToPlace,
+                if (!GwentStone.getGame().getTable().addCard(minionToPlace,
                         calculateRowToPlaceCard)) {
                     commandNode.put("error", "Cannot place card on table since row is full.");
                     debugOutput.add(commandNode);

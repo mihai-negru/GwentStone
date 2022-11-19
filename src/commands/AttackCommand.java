@@ -30,8 +30,8 @@ public final class AttackCommand {
         }
 
         int playerIndex = GwentStone.getGame().getActivePlayerIndex() - 1;
-        if (!GwentStone.getGame().getTable().cardBelongsToEnemy(playerIndex,
-                attackedCardX, attackedCardY)) {
+        if (!GwentStone.getGame().getTable().isEnemy(playerIndex,
+                attackedCardX)) {
             commandNode.put("error", "Attacked card does not belong to the enemy.");
             debugOutput.add(commandNode);
         } else if (attackerCard.isFreezing()) {

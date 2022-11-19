@@ -188,7 +188,7 @@ public final class GwentStone {
         if (gameIsAlive) {
             players[activePlayerIndex].changeTurn();
             players[activePlayerIndex].wakeHeroUp();
-            table.resetPlayerCards(activePlayerIndex);
+            table.anotherRound(activePlayerIndex);
             activePlayerIndex = (activePlayerIndex + 1) % 2;
             players[activePlayerIndex].changeTurn();
         }
@@ -221,7 +221,7 @@ public final class GwentStone {
      * players play more than one game).</p>
      */
     private void exit() {
-        table.clearTable();
+        table.clear();
         players[0].resetMana();
         players[1].resetMana();
         ++playedGames;

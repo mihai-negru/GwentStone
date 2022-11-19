@@ -48,7 +48,7 @@ public final class Winterfell extends Environment {
 
         GwentStone.getGame()
                 .getTable()
-                .getCardsRow(cardX)
+                .getRow(cardX)
                 .forEach(Minion::freeze);
 
         return "Ok";

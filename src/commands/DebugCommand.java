@@ -80,7 +80,7 @@ public final class DebugCommand {
     }
 
     private static void getCardsOnTable(final ArrayNode debugOutput) {
-        var table = GwentStone.getGame().getTable().getCards();
+        var table = GwentStone.getGame().getTable().getTable();
 
         ObjectNode commandNode = debugOutput.objectNode();
         commandNode.put("command", COMMAND_THREE);
@@ -130,7 +130,7 @@ public final class DebugCommand {
         commandNode.put("x", posX);
         commandNode.put("y", posY);
 
-        var tableRow = GwentStone.getGame().getTable().getCards().get(posX);
+        var tableRow = GwentStone.getGame().getTable().getTable().get(posX);
 
         if (tableRow.size() > posY) {;
             tableRow.get(posY).toJson(commandNode.putObject("output"));
@@ -176,7 +176,7 @@ public final class DebugCommand {
 
         GwentStone.getGame()
                 .getTable()
-                .getCards()
+                .getTable()
                 .forEach(minions -> minions.stream()
                         .filter(Minion::isFreezing)
                         .forEach(minion -> minion.toJson(cardsOutput.addObject())));

@@ -54,7 +54,7 @@ public final class LordRoyce extends Hero {
             return "Selected row does not belong to the enemy.";
         }
 
-        final var row = GwentStone.getGame().getTable().getCardsRow(cardX);
+        final var row = GwentStone.getGame().getTable().getRow(cardX);
 
         int maxAttackDamage = -1;
         Minion maxAttackDamageMinion = null;

@@ -76,7 +76,7 @@ public final class TheRipper extends Minion implements SpecialCard {
         final int activePlayer = GwentStone.getGame().getActivePlayerIndex() - 1;
 
         if (!GwentStone.getGame().getTable()
-                .cardBelongsToEnemy(activePlayer, cardX, cardY)) {
+                .isEnemy(activePlayer, cardX)) {
             return "Attacked card does not belong to the enemy.";
         }
 

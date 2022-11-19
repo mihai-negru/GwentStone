@@ -74,7 +74,7 @@ public final class Disciple extends Minion implements SpecialCard {
 
         final int activePlayer = GwentStone.getGame().getActivePlayerIndex() - 1;
 
-        if (GwentStone.getGame().getTable().cardBelongsToEnemy(activePlayer, cardX, cardY)) {
+        if (GwentStone.getGame().getTable().isEnemy(activePlayer, cardX)) {
             return "Attacked card does not belong to the current player.";
         }
 
