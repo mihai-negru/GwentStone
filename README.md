@@ -8,18 +8,21 @@ True based story about two famous games **Heartstone** and **Gwent**.
 2. [Main Functionality](#main-desc)
    1. [Project Structure](#main-proj-desc)
    2. [File hierarchy](main-file-desc)
-3. [Main Game](#game-desc)
-4. [Cards Package](#cards-desc)
+3. [Cards Package](#cards-desc)
    1. [Description](#cards-desc-desc)
    2. [ULM Schema](#cards-ulm-desc)
    3. [Explaining the ULM](#cards-expl-desc)
-5. [Players Package](#players-desc)
+4. [Players Package](#players-desc)
    1. [Description](#players-desc-desc)
    2. [ULM Schema](#players-ulm-desc)
    3. [Explaining the ULM](#players-expl-desc)
-6. [Battlefield Package](#battle-desc)
-7. [Commands Package](#commands-desc)
-8. [Actions Package](#actions-desc)
+5. [Battlefield Package](#battle-desc)
+   1. [Description](#battle-desc-desc)
+   2. [ULM Schema](#battle-ulm-desc)
+   3. [Explaining the ULM](#battle-expl-desc)
+6. [Commands Package](#commands-desc)
+7. [Actions Package](#actions-desc)
+8. [Main Game](#game-desc)
 
 
 <a name="start-desc"></a>
@@ -66,10 +69,6 @@ My implementation of the project can be found in the following packages:
 * *commands* - special class, working as **log** functions/classes.
 * *game* - a singleton class maintaining the whole game logic.
 * *players* - a package designed for players functionalities.
-
-
-<a name="game-desc"></a>
-## **Main Game**
 
 
 <a name="cards-desc"></a>
@@ -207,9 +206,49 @@ inherit the **Player** class and to give **basic** functionalities to a player.
 ## **Battlefield Package**
 
 
+<a name="battle-desc-desc"></a>
+### **Description**
+
+As for players there cannot be a valid game if there is not a right and
+**dangerous** battlefield filled with a lot of angry and harmfully **Minions**.
+As usual, the **BattleTable** Class that exists int this package does try
+not to communicate with the outer world, however it has a **strong** connection
+with the **Minion** class that we will discuss in the next sections. For now keep
+enjoying the beauty of a good game.
+
+
+<a name="battle-ulm-desc"></a>
+### **ULM Schema**
+
+![battlefield ulm schema](images/battlefield-hierarchy.jpg)
+
+
+<a name="battle-expl-desc"></a>
+### **Explaining the ULM**
+
+The **BattleTable** Class is as easy as it sounds. The class is a maintainer
+of a matrix full of **minions**, and all the actions are related to the main
+matrix **table** field (the core of the class itself). It is very important to understand
+that the class cannot exist without *minions*, because it will be just a simple field and
+not a **battlefield**.
+
+Keep for now in mind that the **BattleTable** Object (when it will be instanced) is the main place
+where all the actions happen, for this reason I tried to encapsulate the functionalities as much as I could,
+for this reason the only instance there the **BattleTable** can be found is in the **GwentStone** class,
+however about this special class we will discuss in the next sections.
+
+>**NOTE:** A very important nuance is that the battle table has some functions to check the table
+> integrity and to clear the table after each game session played (match). More about this functionality
+> will be discused on the *Main game* section 
+
+
 <a name="commands-desc"></a>
 ## **Commands Package**
 
 
 <a name="actions-desc"></a>
 ## **Actions Package**
+
+
+<a name="game-desc"></a>
+## **Main Game**
