@@ -54,7 +54,7 @@ public final class EmpressThorina extends Hero {
             return "Selected row does not belong to the enemy.";
         }
 
-        final var row = GwentStone.getGame().getTable().getRow(cardX);
+        final var row = GwentStone.getGame().getBattleField().getRow(cardX);
 
         int maxHealth = -1;
         int minionIndex = -1;
@@ -74,7 +74,7 @@ public final class EmpressThorina extends Hero {
         }
 
         unleashTheBeast();
-        GwentStone.getGame().getTable().removeCard(cardX, minionIndex);
+        GwentStone.getGame().getBattleField().removeCard(cardX, minionIndex);
 
         return "Ok";
     }

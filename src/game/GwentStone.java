@@ -46,7 +46,7 @@ public final class GwentStone {
      * will take place.</p>
      */
     @Getter
-    private final BattleTable table;
+    private final BattleTable battleField;
 
     /**
      * <p>All the game/games commands.</p>
@@ -86,7 +86,7 @@ public final class GwentStone {
      */
     private GwentStone() {
         players = new PlayingPlayer[2];
-        table = new BattleTable();
+        battleField = new BattleTable();
     }
 
     /**
@@ -188,7 +188,7 @@ public final class GwentStone {
         if (gameIsAlive) {
             players[activePlayerIndex].changeTurn();
             players[activePlayerIndex].wakeHeroUp();
-            table.anotherRound(activePlayerIndex);
+            battleField.anotherRound(activePlayerIndex);
             activePlayerIndex = (activePlayerIndex + 1) % 2;
             players[activePlayerIndex].changeTurn();
         }
@@ -221,7 +221,7 @@ public final class GwentStone {
      * players play more than one game).</p>
      */
     private void exit() {
-        table.clear();
+        battleField.clear();
         players[0].resetMana();
         players[1].resetMana();
         ++playedGames;

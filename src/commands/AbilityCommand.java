@@ -7,10 +7,28 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import game.GwentStone;
 
+/**
+ * <p>Class collection of static method to resolve the
+ * functionality for using special minion ability.</p>
+ *
+ * @author Mihai Negru
+ * @since 1.0.0
+ */
 public final class AbilityCommand {
-    private AbilityCommand() {
-    }
 
+    /**
+     * <p>Don't let anyone instantiate this class.</p>
+     */
+    private AbilityCommand() { }
+
+    /**
+     * <p>Main function to solve the usage of special
+     * minion ability.</p>
+     * @param debugOutput {@code ArrayNode} Object to print
+     *                                     the output.
+     * @param action command containing all the information
+     *               about the solving problem.
+     */
     public static void solveCommand(final ArrayNode debugOutput, final ActionsInput action) {
         if ((debugOutput == null) || (action == null)) {
             return;
@@ -19,30 +37,33 @@ public final class AbilityCommand {
         final int attackedCardX = action.getCardAttacked().getX();
         final int attackedCardY = action.getCardAttacked().getY();
 
-        ObjectNode commandNode = debugOutput.objectNode();
-        commandNode.put("command", "cardUsesAbility");
-        commandNode.putObject("cardAttacker").put("x", action.getCardAttacker().getX()).put("y",
+        final ObjectNode output = debugOutput.objectNode();
+        output.put("command", "cardUsesAbility");
+        output.putObject("cardAttacker").put("x", action.getCardAttacker().getX()).put("y",
                 action.getCardAttacker().getY());
-        commandNode.putObject("cardAttacked").put("x", attackedCardX).put("y", attackedCardY);
+        output.putObject("cardAttacked").put("x", attackedCardX).put("y", attackedCardY);
 
-        Minion attackerCard = GwentStone.getGame().getTable().getCard(
-                action.getCardAttacker().getX(), action.getCardAttacker().getY());
+       final Minion attackerCard = GwentStone.getGame()
+               .getBattleField()
+               .getCard(action.getCardAttacker().getX(), action.getCardAttacker().getY());
 
         if (attackerCard == null) {
             return;
         }
 
         if (attackerCard.isFreezing()) {
-            commandNode.put("error", "Attacker card is frozen.");
-            debugOutput.add(commandNode);
+            output.put("error", "Attacker card is frozen.");
+            debugOutput.add(output);
         } else if (attackerCard.isSleeping()) {
-            commandNode.put("error", "Attacker card has already attacked this turn.");
-            debugOutput.add(commandNode);
+            output.put("error", "Attacker card has already attacked this turn.");
+            debugOutput.add(output);
         } else {
-            String errorMessage = ((SpecialCard) attackerCard).unleashTheHell(attackedCardX, attackedCardY);
+            final String errorMessage = ((SpecialCard) attackerCard)
+                    .unleashTheHell(attackedCardX, attackedCardY);
+
             if (!errorMessage.equals("Ok")) {
-                commandNode.put("error", errorMessage);
-                debugOutput.add(commandNode);
+                output.put("error", errorMessage);
+                debugOutput.add(output);
             }
         }
     }

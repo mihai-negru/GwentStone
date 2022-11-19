@@ -56,7 +56,7 @@ public final class KingMudface extends Hero {
 
         unleashTheBeast();
         GwentStone.getGame()
-                .getTable()
+                .getBattleField()
                 .getRow(cardX)
                 .forEach(minion -> minion.makeHarder(1));
 

@@ -75,18 +75,18 @@ public final class Miraj extends Minion implements SpecialCard {
 
         final int activePlayer = GwentStone.getGame().getActivePlayerIndex() - 1;
 
-        if (!GwentStone.getGame().getTable()
+        if (!GwentStone.getGame().getBattleField()
                 .isEnemy(activePlayer, cardX)) {
             return "Attacked card does not belong to the enemy.";
         }
 
-        final Minion minion = GwentStone.getGame().getTable().getCard(cardX, cardY);
+        final Minion minion = GwentStone.getGame().getBattleField().getCard(cardX, cardY);
 
         if (minion == null) {
             return "Null card.";
         }
 
-        if (GwentStone.getGame().getTable().notAttackedATank(minion, cardX)) {
+        if (GwentStone.getGame().getBattleField().notAttackedATank(minion, cardX)) {
             return "Attacked card is not of type 'Tank'.";
         }
 

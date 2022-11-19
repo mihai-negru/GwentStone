@@ -56,7 +56,7 @@ public final class GeneralKocioraw extends Hero {
 
         unleashTheBeast();
         GwentStone.getGame()
-                .getTable()
+                .getBattleField()
                 .getRow(cardX)
                 .forEach(minion -> minion.makeStronger(1));
 

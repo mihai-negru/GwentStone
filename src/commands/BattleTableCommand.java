@@ -8,58 +8,78 @@ import fileio.ActionsInput;
 import game.GwentStone;
 import players.PlayingPlayer;
 
+/**
+ * <p>Class collection of static method to resolve the
+ * functionality for using the battle table.</p>
+ *
+ * @author Mihai Negru
+ * @since 1.0.0
+ */
 public final class BattleTableCommand {
-    private BattleTableCommand() {
-    }
 
+    /**
+     * <p>Max row allowed in the battle table.</p>
+     */
+    private static final int MAX_ROW = 4;
+
+    /**
+     * <p>Don't let anyone instantiate this class.</p>
+     */
+    private BattleTableCommand() { }
+
+    /**
+     * <p>Main function to solve the usage of battlefield.</p>
+     * @param debugOutput {@code ArrayNode} Object to print
+     *                                     the output.
+     * @param action command containing all the information
+     *               about the solving problem.
+     */
     public static void solveCommand(final ArrayNode debugOutput, final ActionsInput action) {
         if ((debugOutput == null) || (action == null)) {
             return;
         }
 
-        int playerIndex = GwentStone.getGame().getActivePlayerIndex();
-        PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
+        final int activePlayerIndex = GwentStone.getGame().getActivePlayerIndex();
+        final PlayingPlayer activePlayer = GwentStone.getGame().getPlayer(activePlayerIndex);
 
-        ObjectNode commandNode = debugOutput.objectNode();
-        commandNode.put("command", "placeCard");
-        commandNode.put("handIdx", action.getHandIdx());
+        final ObjectNode output = debugOutput.objectNode();
+        output.put("command", "placeCard");
+        output.put("handIdx", action.getHandIdx());
 
-        Card cardToPlace = player.getHand().getCard(action.getHandIdx());
+        final Card cardToPlace = activePlayer.getHand().getCard(action.getHandIdx());
 
         if (cardToPlace == null) {
             return;
         }
 
         if (!cardToPlace.isMinion()) {
-            commandNode.put("error", "Cannot place environment card on table.");
-            debugOutput.add(commandNode);
+            output.put("error", "Cannot place environment card on table.");
+            debugOutput.add(output);
         } else {
-            Minion minionToPlace = (Minion) cardToPlace;
-            if (minionToPlace.getMana() > player.getMana()) {
-                commandNode.put("error", "Not enough mana to place card on table.");
-                debugOutput.add(commandNode);
+            final Minion minionToPlace = (Minion) cardToPlace;
+            if (minionToPlace.getMana() > activePlayer.getMana()) {
+                output.put("error", "Not enough mana to place card on table.");
+                debugOutput.add(output);
             } else {
-                boolean cardInFrontRow = minionToPlace.inFrontRow();
+                boolean minionIsTough = minionToPlace.inFrontRow();
 
-                int calculateRowToPlaceCard;
-                if ((playerIndex == 1) && cardInFrontRow) {
-                    calculateRowToPlaceCard = 2;
-                } else if (playerIndex == 1) {
-                    calculateRowToPlaceCard = 3;
-                } else if ((playerIndex == 2) && cardInFrontRow) {
-                    calculateRowToPlaceCard = 1;
+                int cardRow;
+                if ((activePlayerIndex == 1) && minionIsTough) {
+                    cardRow = 2;
+                } else if (activePlayerIndex == 1) {
+                    cardRow = MAX_ROW - 1;
+                } else if ((activePlayerIndex == 2) && minionIsTough) {
+                    cardRow = 1;
                 } else {
-                    calculateRowToPlaceCard = 0;
+                    cardRow = 0;
                 }
 
-
-                if (!GwentStone.getGame().getTable().addCard(minionToPlace,
-                        calculateRowToPlaceCard)) {
-                    commandNode.put("error", "Cannot place card on table since row is full.");
-                    debugOutput.add(commandNode);
+                if (!GwentStone.getGame().getBattleField().addCard(minionToPlace, cardRow)) {
+                    output.put("error", "Cannot place card on table since row is full.");
+                    debugOutput.add(output);
                 } else {
-                    player.getHand().removeCard(action.getHandIdx());
-                    player.loseMana(minionToPlace.getMana());
+                    activePlayer.getHand().removeCard(action.getHandIdx());
+                    activePlayer.loseMana(minionToPlace.getMana());
                 }
             }
         }
