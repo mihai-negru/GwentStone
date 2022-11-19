@@ -20,8 +20,10 @@ True based story about two famous games **Heartstone** and **Gwent**.
    1. [Description](#battle-desc-desc)
    2. [ULM Schema](#battle-ulm-desc)
    3. [Explaining the ULM](#battle-expl-desc)
-6. [Commands Package](#commands-desc)
-7. [Actions Package](#actions-desc)
+6. [Actions Package](#actions-desc)
+   1. [Description](#actions-desc-desc)
+   2. [Need of class](#actions-expl-desc)
+7. [Commands Package](#commands-desc)
 8. [Main Game](#game-desc)
 
 
@@ -234,7 +236,7 @@ not a **battlefield**.
 
 Keep for now in mind that the **BattleTable** Object (when it will be instanced) is the main place
 where all the actions happen, for this reason I tried to encapsulate the functionalities as much as I could,
-for this reason the only instance there the **BattleTable** can be found is in the **GwentStone** class,
+for this reason the only instance where the **BattleTable** can be found is in the **GwentStone** class,
 however about this special class we will discuss in the next sections.
 
 >**NOTE:** A very important nuance is that the battle table has some functions to check the table
@@ -242,12 +244,51 @@ however about this special class we will discuss in the next sections.
 > will be discused on the *Main game* section 
 
 
-<a name="commands-desc"></a>
-## **Commands Package**
-
-
 <a name="actions-desc"></a>
 ## **Actions Package**
+
+
+<a name="actions-desc-desc"></a>
+### **Description**
+
+Because our game works on fetching commands and printing the output,
+I came with the idea that will be nice and a very good practice
+to create a separate class that will handle the actions and store
+all the information about the actions.
+
+In general as many of my classes the **Action** class is a wrapper
+for a **List** of actions (an action is an instance of *ActionsInput*),
+the game does not care about the actions and commands and parse the
+information to the **Action** class that knows how to handle the
+situation.
+
+>**NOTE:** I am aware that this class is a former class and could be easily deleted
+> however as I tried to tell during our discuss that is best practice to modularize
+> all the functions and not to fill one class with a bunch of functionality when
+> it can be break down and be maintained a lot easier and a lot intuitively.
+
+<a name="actions-expl-desc"></a>
+### **Need of class**
+
+As I mentioned above the **Action** class is practically a handler for our commands.
+The game class does not know what to do when a command enters so the information
+is parsed to this class and any action needed is taken.
+
+The Action class knows for every time of action what to do and how to maintain the
+code in order not to break the game. Imagine that the whole command processing
+would be in the game class or encapsulated in another card (Player for example),
+it would break view of the whole **OOP** concepts.
+
+The **Action** class uses mainly the **log** functions from the **commands**
+package. I needed first to explain this class in order for you to understand why I
+implemented the **commands** classes like that.
+
+>**NOTE:** A better explanation of the commands classes will be found in the **Commands Package**
+> section and the reason for implementing them as a log classes.
+
+
+<a name="commands-desc"></a>
+## **Commands Package**
 
 
 <a name="game-desc"></a>
