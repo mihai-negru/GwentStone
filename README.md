@@ -24,7 +24,10 @@ True based story about two famous games **Heartstone** and **Gwent**.
    1. [Description](#actions-desc-desc)
    2. [Need of class](#actions-expl-desc)
 7. [Commands Package](#commands-desc)
+   1. [Description](#commands-desc-desc)
+   2. [Why Static?](#commands-expl-desc)
 8. [Main Game](#game-desc)
+9. [Bonus](#bonus-desc)
 
 
 <a name="start-desc"></a>
@@ -290,6 +293,63 @@ implemented the **commands** classes like that.
 <a name="commands-desc"></a>
 ## **Commands Package**
 
+<a name="commands-desc-desc"></a>
+### **Description**
+
+Now that we have discussed the **Action** class and why we need it,
+I can explain to you what are the **Commands** classes (collections.)
+
+Every action has to perform or process a command, and the commands are totally
+different between them, so if we would add the whole functionality to the **Action**
+class it would be a total mess. Instead of using the **Actions** class that works like
+a handler, I came to the idea to create different collections that know how to solve
+the commands.
+
+Imagine the above words like this:<br>
+When you are doing some applications in **JavaFx** and you want
+to catch an event and to run a handler you can do this very easy by
+calling the specific function for the event catching and then
+create an anonymous class or a lambda function that solves your problem.
+
+The same idea is behind these **Commands** collections, think of them
+as the lambda functions that know how to handle a specific problem.
+The **Action** class works as the event catching and then processes the
+code from the lambda function (meaning our **Command** function).
+
+>**NOTE:** The **Commands** classes have static methods and should not be
+> instanced by any meaning. The static methods reason will be presented
+> in the next subsection.
+
+
+<a name="commands-expl-desc"></a>
+### **Why Static?**
+
+As you have read above, **Commands** classes are collections
+of static methods, in general they have just one function that solves
+just one command, but the command class for the **debugging** actions
+have more than one static function.
+
+It would be a chaos to instantiate a new **Command** class just to process
+a single command (as the lambda functions you right it now and call it now and
+then forget about it). The collection of static methods is the most suitable
+way to manage the actions.
+
+Even though you can tell me that it break the concepts of **OOP**, it will be
+a lie, because the functions are structured in such way that they could be easily
+managed and if you want to refactor something, it would be a lot easier.
+
+For example, I refactored the commands code for **3** time, and it was very
+easy, because I used this implementation.
+
+>**NOTE:** You can argue with me and tell me that it would be better to place them
+> in **Action** class, however it would be made the **Action** class a mess and not
+> a class, as I have said breaking and modulation of the code is the best thing
+> we can do to keep our code easy to program and to read after that.
+
 
 <a name="game-desc"></a>
 ## **Main Game**
+
+
+<a name="bonus-desc"></a>
+## **Bonus**
