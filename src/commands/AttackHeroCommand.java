@@ -24,9 +24,9 @@ public final class AttackHeroCommand {
         commandNode.put("command", "useAttackHero");
         commandNode.putObject("cardAttacker").put("x", attackerCardX).put("y", attackerCardY);
 
-        final int passivePlayer = GwentStone.getGame().getPlayingPlayerIdx() % 2 + 1;
+        final int passivePlayer = GwentStone.getGame().getActivePlayerIndex() % 2 + 1;
 
-        Minion attackerCard = GwentStone.getGame().getPlayingTable().getCard(attackerCardX, attackerCardY);
+        Minion attackerCard = GwentStone.getGame().getTable().getCard(attackerCardX, attackerCardY);
 
         if (attackerCard == null) {
             return;
@@ -41,7 +41,7 @@ public final class AttackHeroCommand {
         } else {
             final int activePlayer = passivePlayer % 2 + 1;
 
-            if (GwentStone.getGame().getPlayingTable().rowHasTanks(activePlayer)) {
+            if (GwentStone.getGame().getTable().rowHasTanks(activePlayer)) {
                 commandNode.put("error", "Attacked card is not of type 'Tank'.");
                 debugOutput.add(commandNode);
             } else {

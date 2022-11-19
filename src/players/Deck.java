@@ -84,67 +84,39 @@ public final class Deck {
      * functionalities needed for a gameplay.
      */
     private Card createCardFromInput(final CardInput playerCard) {
-        Card card;
-
-        switch (playerCard.getName()) {
-            case "Berserker" -> {
-                card = new Berserker(playerCard.getMana(), playerCard.getHealth(),
+        return switch (playerCard.getName()) {
+            case "Berserker" -> new Berserker(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Disciple" -> {
-                card = new Disciple(playerCard.getMana(), playerCard.getHealth(),
+            case "Disciple" -> new Disciple(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Goliath" -> {
-                card = new Goliath(playerCard.getMana(), playerCard.getHealth(),
+            case "Goliath" -> new Goliath(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Miraj" -> {
-                card = new Miraj(playerCard.getMana(), playerCard.getHealth(),
+            case "Miraj" -> new Miraj(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Sentinel" -> {
-                card = new Sentinel(playerCard.getMana(), playerCard.getHealth(),
+            case "Sentinel" -> new Sentinel(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "The Cursed One" -> {
-                card = new TheCursedOne(playerCard.getMana(), playerCard.getHealth(),
+            case "The Cursed One" -> new TheCursedOne(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "The Ripper" -> {
-                card = new TheRipper(playerCard.getMana(), playerCard.getHealth(),
+            case "The Ripper" -> new TheRipper(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Warden" -> {
-                card = new Warden(playerCard.getMana(), playerCard.getHealth(),
+            case "Warden" -> new Warden(playerCard.getMana(), playerCard.getHealth(),
                         playerCard.getAttackDamage(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Firestorm" -> {
-                card = new Firestorm(playerCard.getMana(), playerCard.getDescription(),
+            case "Firestorm" -> new Firestorm(playerCard.getMana(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Heart Hound" -> {
-                card = new HeartHound(playerCard.getMana(), playerCard.getDescription(),
+            case "Heart Hound" -> new HeartHound(playerCard.getMana(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            case "Winterfell" -> {
-                card = new Winterfell(playerCard.getMana(), playerCard.getDescription(),
+            case "Winterfell" -> new Winterfell(playerCard.getMana(), playerCard.getDescription(),
                         playerCard.getColors());
-            }
-            default -> {
-                card = null;
-            }
-        }
-
-        return card;
+            default -> null;
+        };
     }
 
     /**
@@ -158,50 +130,20 @@ public final class Deck {
      * functionalities needed for a gameplay.
      */
     private Card copyCardInfo(final Card copyCard) {
-        Card card;
-
-        String cardName = copyCard.getName();
-
-        switch (cardName) {
-            case "Berserker" -> {
-                card = new Berserker((Berserker) copyCard);
-            }
-            case "Disciple" -> {
-                card = new Disciple((Disciple) copyCard);
-            }
-            case "Goliath" -> {
-                card = new Goliath((Goliath) copyCard);
-            }
-            case "Miraj" -> {
-                card = new Miraj((Miraj) copyCard);
-            }
-            case "Sentinel" -> {
-                card = new Sentinel((Sentinel) copyCard);
-            }
-            case "The Cursed One" -> {
-                card = new TheCursedOne((TheCursedOne) copyCard);
-            }
-            case "The Ripper" -> {
-                card = new TheRipper((TheRipper) copyCard);
-            }
-            case "Warden" -> {
-                card = new Warden((Warden) copyCard);
-            }
-            case "Firestorm" -> {
-                card = new Firestorm((Firestorm) copyCard);
-            }
-            case "Heart Hound" -> {
-                card = new HeartHound((HeartHound) copyCard);
-            }
-            case "Winterfell" -> {
-                card = new Winterfell((Winterfell) copyCard);
-            }
-            default -> {
-                card = null;
-            }
-        }
-
-        return card;
+        return switch (copyCard.getName()) {
+            case "Berserker" -> new Berserker((Berserker) copyCard);
+            case "Disciple" -> new Disciple((Disciple) copyCard);
+            case "Goliath" -> new Goliath((Goliath) copyCard);
+            case "Miraj" -> new Miraj((Miraj) copyCard);
+            case "Sentinel" -> new Sentinel((Sentinel) copyCard);
+            case "The Cursed One" -> new TheCursedOne((TheCursedOne) copyCard);
+            case "The Ripper" -> new TheRipper((TheRipper) copyCard);
+            case "Warden" -> new Warden((Warden) copyCard);
+            case "Firestorm" -> new Firestorm((Firestorm) copyCard);
+            case "Heart Hound" -> new HeartHound((HeartHound) copyCard);
+            case "Winterfell" -> new Winterfell((Winterfell) copyCard);
+            default -> null;
+        };
     }
 
     /**

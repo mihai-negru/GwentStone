@@ -20,7 +20,7 @@ public final class HeroCommand {
         commandNode.put("command", "useHeroAbility");
         commandNode.put("affectedRow", action.getAffectedRow());
 
-        final int activePlayerIndex = GwentStone.getGame().getPlayingPlayerIdx();
+        final int activePlayerIndex = GwentStone.getGame().getActivePlayerIndex();
         final PlayingPlayer activePlayer = GwentStone.getGame().getPlayer(activePlayerIndex);
         final Hero attackingHero = activePlayer.getHero();
 

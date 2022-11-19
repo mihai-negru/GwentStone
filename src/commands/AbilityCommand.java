@@ -25,7 +25,7 @@ public final class AbilityCommand {
                 action.getCardAttacker().getY());
         commandNode.putObject("cardAttacked").put("x", attackedCardX).put("y", attackedCardY);
 
-        Minion attackerCard = GwentStone.getGame().getPlayingTable().getCard(
+        Minion attackerCard = GwentStone.getGame().getTable().getCard(
                 action.getCardAttacker().getX(), action.getCardAttacker().getY());
 
         if (attackerCard == null) {

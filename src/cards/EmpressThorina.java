@@ -47,14 +47,14 @@ public final class EmpressThorina extends Hero {
             return "Bad positions.";
         }
 
-        final int activePlayer = GwentStone.getGame().getPlayingPlayerIdx();
+        final int activePlayer = GwentStone.getGame().getActivePlayerIndex();
 
         if (((activePlayer == 1) && (cardX == 2 || cardX == MAX_ROW - 1))
                 || ((activePlayer == 2) && (cardX == 0 || cardX == 1))) {
             return "Selected row does not belong to the enemy.";
         }
 
-        final var row = GwentStone.getGame().getPlayingTable().getCardsRow(cardX);
+        final var row = GwentStone.getGame().getTable().getCardsRow(cardX);
 
         int maxHealth = -1;
         int minionIndex = -1;
@@ -74,7 +74,7 @@ public final class EmpressThorina extends Hero {
         }
 
         unleashTheBeast();
-        GwentStone.getGame().getPlayingTable().removeCard(cardX, minionIndex);
+        GwentStone.getGame().getTable().removeCard(cardX, minionIndex);
 
         return "Ok";
     }

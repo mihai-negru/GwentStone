@@ -16,7 +16,7 @@ public final class EnvironmentCommand {
             return;
         }
 
-        int playerIndex = GwentStone.getGame().getPlayingPlayerIdx();
+        int playerIndex = GwentStone.getGame().getActivePlayerIndex();
         PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
 
         ObjectNode commandNode = debugOutput.objectNode();

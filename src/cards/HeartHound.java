@@ -57,13 +57,13 @@ public final class HeartHound extends Environment {
             rowIndex = 0;
         }
 
-        final var selectedRow = GwentStone.getGame().getPlayingTable().getCardsRow(rowIndex);
+        final var selectedRow = GwentStone.getGame().getTable().getCardsRow(rowIndex);
 
         if (selectedRow.size() >= MAX_ROW) {
             return "Bad positions.";
         }
 
-        final var row = GwentStone.getGame().getPlayingTable().getCardsRow(cardX);
+        final var row = GwentStone.getGame().getTable().getCardsRow(cardX);
 
         Minion maxHealthMinion = row.get(0);
         int maxHealthMinionIndex = -1;

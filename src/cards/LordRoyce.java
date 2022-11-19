@@ -47,14 +47,14 @@ public final class LordRoyce extends Hero {
             return "Bad positions.";
         }
 
-        final int activePlayer = GwentStone.getGame().getPlayingPlayerIdx();
+        final int activePlayer = GwentStone.getGame().getActivePlayerIndex();
 
         if (((activePlayer == 1) && (cardX == 2 || cardX == MAX_ROW - 1))
                 || ((activePlayer == 2) && (cardX == 0 || cardX == 1))) {
             return "Selected row does not belong to the enemy.";
         }
 
-        final var row = GwentStone.getGame().getPlayingTable().getCardsRow(cardX);
+        final var row = GwentStone.getGame().getTable().getCardsRow(cardX);
 
         int maxAttackDamage = -1;
         Minion maxAttackDamageMinion = null;

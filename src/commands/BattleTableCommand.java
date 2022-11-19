@@ -17,7 +17,7 @@ public final class BattleTableCommand {
             return;
         }
 
-        int playerIndex = GwentStone.getGame().getPlayingPlayerIdx();
+        int playerIndex = GwentStone.getGame().getActivePlayerIndex();
         PlayingPlayer player = GwentStone.getGame().getPlayer(playerIndex);
 
         ObjectNode commandNode = debugOutput.objectNode();
@@ -53,7 +53,7 @@ public final class BattleTableCommand {
                 }
 
 
-                if (!GwentStone.getGame().getPlayingTable().addCardToTable(minionToPlace,
+                if (!GwentStone.getGame().getTable().addCardToTable(minionToPlace,
                         calculateRowToPlaceCard)) {
                     commandNode.put("error", "Cannot place card on table since row is full.");
                     debugOutput.add(commandNode);

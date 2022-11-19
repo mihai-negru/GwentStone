@@ -22,15 +22,15 @@ public final class AttackCommand {
                 action.getCardAttacker().getY());
         commandNode.putObject("cardAttacked").put("x", attackedCardX).put("y", attackedCardY);
 
-        Minion attackerCard = GwentStone.getGame().getPlayingTable().getCard(
+        Minion attackerCard = GwentStone.getGame().getTable().getCard(
                 action.getCardAttacker().getX(), action.getCardAttacker().getY());
 
         if (attackerCard == null) {
             return;
         }
 
-        int playerIndex = GwentStone.getGame().getPlayingPlayerIdx() - 1;
-        if (!GwentStone.getGame().getPlayingTable().cardBelongsToEnemy(playerIndex,
+        int playerIndex = GwentStone.getGame().getActivePlayerIndex() - 1;
+        if (!GwentStone.getGame().getTable().cardBelongsToEnemy(playerIndex,
                 attackedCardX, attackedCardY)) {
             commandNode.put("error", "Attacked card does not belong to the enemy.");
             debugOutput.add(commandNode);

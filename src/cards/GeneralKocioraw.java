@@ -47,7 +47,7 @@ public final class GeneralKocioraw extends Hero {
             return "Bad positions.";
         }
 
-        final int activePlayer = GwentStone.getGame().getPlayingPlayerIdx();
+        final int activePlayer = GwentStone.getGame().getActivePlayerIndex();
 
         if (((activePlayer == 1) && (cardX == 0 || cardX == 1))
                 || ((activePlayer == 2) && (cardX == 2 || cardX == MAX_ROW - 1))) {
@@ -56,7 +56,7 @@ public final class GeneralKocioraw extends Hero {
 
         unleashTheBeast();
         GwentStone.getGame()
-                .getPlayingTable()
+                .getTable()
                 .getCardsRow(cardX)
                 .forEach(minion -> minion.makeStronger(1));
 
