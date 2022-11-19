@@ -27,6 +27,9 @@ True based story about two famous games **Heartstone** and **Gwent**.
    1. [Description](#commands-desc-desc)
    2. [Why Static?](#commands-expl-desc)
 8. [Main Game](#game-desc)
+   1. [Description](#game-desc-desc)
+   2. [ULM Schema](#game-ulm-desc)
+   3. [Usages and binding](#game-expl-desc)
 9. [Bonus](#bonus-desc)
 
 
@@ -306,7 +309,7 @@ a handler, I came to the idea to create different collections that know how to s
 the commands.
 
 Imagine the above words like this:<br>
-When you are doing some applications in **JavaFx** and you want
+When you are doing some applications in **JavaFX** and you want
 to catch an event and to run a handler you can do this very easy by
 calling the specific function for the event catching and then
 create an anonymous class or a lambda function that solves your problem.
@@ -351,5 +354,74 @@ easy, because I used this implementation.
 ## **Main Game**
 
 
+<a name="game-desc-desc"></a>
+### **Description**
+
+Now that we have discussed all the main *classes* that build the game,
+let's talk about the one class that combine them all, **GwentStone** class.
+
+This class represents a **Singleton** class, using the Bill Pugh Eager Singleton
+implementation, which is the best in case of using **threading**, even so we do not
+work on a multiple thread level for me is the best implementation ever of a Singleton class.
+
+I have chosen to create the game class as a Singleton for the following reasons:
+* *Very easy to parse information from one place to another*
+* *Easy communication between every class*
+* *Easy to implement and easy to maintain*
+* *It should be impossible to have more games in one game*
+* *A very good reason to practice more on singleton patterns*
+
+>**NOTE:** Because we have broken the code into many classes, the GwentStone class
+> has simple and basic instructions to follow a game loop (preprocess, start, update and exit
+> methods that are private and run internally in the game).
+
+
+<a name="game-ulm-desc"></a>
+### **ULM Schema**
+
+![Game logic ULM](images/game-ulm.jpg)
+
+
+<a name="game-expl-desc"></a>
+### **Usages and Binding**
+
+The **GwentStone** Singleton is the most used instance in the whole project,
+the most usages of the class take place in the commands collections, because
+they need information about the game progress to make and assumption and to
+print an output.
+
+Now recalling our idea if we had not implemented the **Commands** collections
+we would have to insert all the code into the *game* class, now imagine what
+mess would it be.
+
+All the accesses and information about players, minions, battlefield,
+player hand, player deck, statistics and heroes is fetched from the Singleton
+class so this pattern gives us the possibility to make our code easy
+to understand and to implement.
+
+
 <a name="bonus-desc"></a>
 ## **Bonus**
+
+For this section I want to present some usages that I implemented
+in my code. (in other words good practices).
+
+* *Very good file structure* - every class is modularized in a different
+package along with other classes that maintain the same functionality.
+* *Code very easy to follow and good structure* - I tried to give name functions to understand very easy
+what and how every function performs.
+* *JavaDoc* - every class, method, field has its own *JavaDoc*, so you could understand
+easier what every piece of code is doing.
+* *Using streams* - I used a lot of methods as filter, anyMatch, forEach
+and tried to keep the things very easy with streams.
+* *Say not to for loops* - If you look at my code you observe that there
+are very few for loops, instead of them I used streams and **List.forEach**.
+* *Using lambda functions* - It is clear that usage of the streams imply
+usage of lambda functions, however you can perform streams using the
+anonymous classes, however I used just lambda functions.
+
+>**NOTE:** Overall I had a lot of fun doing this game and hope the following assignments
+> will be as funny as this one. This is all I had to say to you, if you have made it
+> this far that it means you are a [find here](https://www.youtube.com/watch?v=1LZZYemqLyU).
+> Feel free to contact my via my email address **determinant289@gmail.com** if you
+> have any other questions about my implementation. Have a good time!!!
